@@ -674,7 +674,7 @@ footer a{color:#B9C0CE}
           <tr><td>Whose account</td><td>One shared account, everybody logs into it</td><td><b>Everyone keeps their own</b></td></tr>
           <tr><td>Who can control playback</td><td>Anyone signed into that account</td><td>Guests — <b>once the host enables guest controls</b></td></tr>
           <tr><td>Setup per event</td><td>None</td><td>Host starts a Jam, shares a link or QR</td></tr>
-          <tr><td>Do guests need Premium</td><td>Not applicable — one account</td><td>Only when joining <b>remotely</b>. Joining in person is free</td></tr>
+          <tr><td>Do guests need Premium</td><td>No — they share the one account</td><td><b>Yes, every one of them</b></td></tr>
           <tr><td>How it goes wrong</td><td>Someone presses play and steals the stream</td><td>Someone's own phone drives a speaker</td></tr>
         </tbody>
       </table>
@@ -682,9 +682,13 @@ footer a{color:#B9C0CE}
   </div>
 
   <div class="col">
-    <div class="callout callout--go">
-      <span class="tag">Join in person, at the meeting point</span>
-      <p>Guests joining a Jam <em>remotely</em> need Premium of their own. Guests joining <em>in person</em> — phones held close together for a moment with Bluetooth on — do not. Get everyone joined before you roll out and it costs nothing, whatever plan they're on.</p>
+    <div class="callout callout--warn">
+      <span class="tag">Every admin needs their own Premium</span>
+      <p>This is the price of keeping your own account, and it's worth checking before you plan around it. Joining a Jam from a distance — the only kind of joining that happens on a moving parade — requires the guest to have Premium. Reports also conflict over whether Free guests can control playback <em>at all</em>. Assume they can't: a Free admin can add to the queue, and should not be counted on as a working remote.</p>
+    </div>
+    <div class="callout callout--go" style="margin-top:1.2rem">
+      <span class="tag">This one fact picks your plan</span>
+      <p>If all your admins already pay for Premium, use a Jam and you're done. If any of them don't, a Jam quietly won't work for that person — and both fallbacks further down fix it: a shared account means only <em>one</em> Premium exists in the whole system, and the DIY web remote needs no admin accounts at all.</p>
     </div>
   </div>
 </section>
@@ -705,7 +709,7 @@ footer a{color:#B9C0CE}
   <div class="figwrap">
     <figure class="fig">
       <div class="scrollx">
-      <svg viewBox="0 0 900 490" role="img" aria-label="Admin phones send commands through Spotify's servers to the disco phone; the disco phone alone feeds a SKAA transmitter which drives four speakers by radio." style="min-width:660px">
+      <svg viewBox="0 0 900 490" role="img" aria-label="Admin phones send commands through Spotify's servers to the disco phone; the disco phone alone feeds a SKAA transmitter over USB, which drives four speakers by radio." style="min-width:660px">
         <defs>
           <marker id="ah-a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#F7A93B"/></marker>
           <marker id="ah-c3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#57D9E8"/></marker>
@@ -755,7 +759,7 @@ footer a{color:#B9C0CE}
 
         <!-- audio chain -->
         <line x1="528" y1="252" x2="596" y2="252" class="s-cyan-s" stroke-width="1.6" marker-end="url(#ah-c3)"/>
-        <text class="s-lab-s" x="562" y="242" text-anchor="middle" style="fill:#57D9E8">3.5 mm</text>
+        <text class="s-lab-s" x="562" y="242" text-anchor="middle" style="fill:#57D9E8">USB</text>
         <rect x="602" y="224" width="92" height="56" rx="3" class="s-box" style="stroke:#57D9E8"/>
         <text class="s-name" x="648" y="248" text-anchor="middle" style="fill:#57D9E8">SKAA</text>
         <text class="s-lab-s" x="648" y="264" text-anchor="middle" style="fill:#57D9E8">TRANSMITTER</text>
@@ -788,8 +792,8 @@ footer a{color:#B9C0CE}
 <section class="chapter">
   <div class="col">
     <p class="eyebrow">Setting it up</p>
-    <h2 class="chapter__h">Five minutes at the meeting point</h2>
-    <p>The disco phone gets prepared at home. The admins do nothing at all until everyone is together at the start of the ride, and then it takes about a minute between them.</p>
+    <h2 class="chapter__h">One message in the group chat</h2>
+    <p>The disco phone gets prepared at home. The admins do nothing but tap a link — from the pub, from the road, from anywhere with a bar of signal.</p>
   </div>
 
   <div class="figwrap">
@@ -801,20 +805,21 @@ footer a{color:#B9C0CE}
         <ol class="steps">
           <li>Whoever owns this phone needs <strong>Premium</strong> — their own everyday account is fine. Nobody else changes anything.</li>
           <li><strong>Download the playlist for offline.</strong> The most valuable line on this page: a coverage blackspot then cannot stop the music.</li>
-          <li>Plug into the SKAA transmitter. Phone volume around 80% and leave it — do the real volume on the transmitter.</li>
+          <li>Plug into the SKAA transmitter over USB. Phone volume around 80% and leave it — do the real volume on the transmitter.</li>
           <li>Do Not Disturb on. A phone call will duck your music in front of a hundred people.</li>
           <li>Mobile data on. Battery pack attached.</li>
           <li>Start the playlist, then start the Jam.</li>
           <li><strong>Jam details → Guest settings → turn on guest controls.</strong> Miss this and your admins can queue tracks but never skip one.</li>
+          <li>Paste the Jam link into the group chat. One message, and anyone who taps it is in.</li>
         </ol>
       </div>
       <div class="cell">
         <span class="tag">At the meeting point, once</span>
         <h3>The admin phones</h3>
-        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">Two to five people. Nothing to install, nothing to log out of.</p>
+        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">Two to five people, each on their own Premium. Nothing to install, nothing to log out of.</p>
         <ol class="steps">
           <li><strong>Stay on your own account.</strong> Nothing about your Spotify changes, tonight or afterwards.</li>
-          <li>Join the Jam: hold your phone near the disco phone with Bluetooth on, or scan its QR code. Doing it here, in person, is what makes it free on any plan.</li>
+          <li>Tap the Jam link in the group chat. That is the entire join — it runs over mobile data, from anywhere, and no Bluetooth or standing-next-to-each-other is involved at any point.</li>
           <li><strong>Turn your own volume to zero.</strong> Your phone streams along silently — that's normal, and nobody hears it.</li>
           <li>Never plug your phone into a speaker, or pair it with one. That is the single thing that breaks the night.</li>
           <li>Skip, pause and queue from your own Spotify app, from anywhere in the line.</li>
@@ -884,14 +889,14 @@ footer a{color:#B9C0CE}
             <td>A second phone is driving a speaker. <b>Find it and disconnect it</b> — SKAA receivers on one transmitter physically cannot drift.</td>
           </tr>
           <tr>
-            <td>A Free-account admin can't join</td>
-            <td>"Premium required"</td>
-            <td>They're joining remotely. They must <b>join in person</b>, phones held together — so do it at the meeting point.</td>
+            <td>One admin can queue but never skip</td>
+            <td>Their added songs appear, their skips don't</td>
+            <td>Either guest controls are off, or <b>that admin is on a Free account</b>. Free guests don't get playback control — that person needs Premium.</td>
           </tr>
           <tr>
             <td>Someone wants in mid-ride</td>
             <td>They have no link</td>
-            <td>Reshare the invite in the group chat. Joining now is remote, so <b>they'll need their own Premium</b>.</td>
+            <td>Reshare the invite in the group chat — it works over mobile data from anywhere in the line. <b>They'll need their own Premium.</b></td>
           </tr>
           <tr>
             <td>Volume buttons do nothing</td>
@@ -1052,6 +1057,7 @@ footer a{color:#B9C0CE}
     <h2 class="chapter__h">The bulletproof fallback</h2>
     <p>Jam is the right first choice because nobody touches their account. But it has moving parts: a link to reshare each event, a guest-controls toggle that can end up off, and a host who has to stay in the session.</p>
     <p>The alternative removes every one of those, at a single cost. Make one shared <strong>Bike Disco</strong> Premium account, put the disco phone on it, and have the admins sign into it too. Now everyone is on one account, so <strong>Spotify Connect</strong> applies: open the app, tap the Connect icon, choose <span class="mono">DISCO PHONE</span>, and you're a remote. No invite links, no per-event setup, nothing to toggle.</p>
+    <p>It also deletes the per-admin Premium bill. The shared account is the only subscription anywhere in the system, so it stops mattering what plan anybody's personal account is on.</p>
     <p>The cost is real. Signing into the Bike Disco account means signing <em>out</em> of your own for the night. And it brings one new failure mode: a single account plays on one device at a time, so an admin who presses play <em>without</em> selecting DISCO PHONE first drags the music into their pocket and the street goes quiet. Recovery takes five seconds — select DISCO PHONE, press play — but it has to be taught.</p>
     <p>Three settings make it work, and the first is the one everybody misses:</p>
     <ul class="ticks">
@@ -1074,7 +1080,7 @@ footer a{color:#B9C0CE}
     <h2 class="chapter__h">A web page with three enormous buttons</h2>
     <p>There's a third route that beats both of the above on sheer ease of use, at the cost of an afternoon from whoever is technical.</p>
     <p>Spotify's Web API can drive playback on any device the account holder has authorised. Authorise it once against the disco phone's account, keep the token on a small server, and put three huge buttons on a web page: <span class="mono">SKIP</span>, <span class="mono">PAUSE</span>, <span class="mono">QUIETER</span>.</p>
-    <p>The admins then need no Spotify account, no app, no login and no invite link. They bookmark one URL and hit a button wearing gloves, in the dark, at speed. Nothing else on this page comes close for that.</p>
+    <p>The admins then need no Spotify account, no Premium, no app, no login and no invite link. They bookmark one URL and hit a button wearing gloves, in the dark, at speed. Nothing else on this page comes close for that.</p>
     <p>The catches: the controlled account needs Premium; the token can't live in a public web page, so this needs a small backend rather than plain static hosting; and anybody holding the link can press the buttons, so keep it obscure and be ready to rotate it.</p>
   </div>
 </section>
@@ -1093,7 +1099,7 @@ footer a{color:#B9C0CE}
     <ul class="ticks">
       <li>One phone, cabled to the SKAA transmitter, Premium, playlist downloaded. It hosts the Jam.</li>
       <li><strong>Turn on guest controls.</strong> This is the step that decides whether the whole thing works.</li>
-      <li>Everyone joins <strong>in person at the meeting point</strong>, keeping their own accounts, free on any plan.</li>
+      <li>Admins tap the Jam link in the group chat — over mobile data, from anywhere in the line. <strong>Each one needs their own Premium.</strong></li>
       <li>Every admin sets their own volume to zero and plugs into nothing.</li>
       <li>Ride the sound bike in the <strong>middle</strong> of the line, not the front.</li>
       <li>Teach one rule: <strong>your phone is a remote, not a speaker.</strong></li>

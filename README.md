@@ -19,7 +19,8 @@ without logging out and back in as the same account.
 
 **Spotify Jam is the cross-account mechanism.** Guests keep their own accounts and can
 play, pause, skip and queue — but **guest controls are OFF by default** (Jam details →
-Guest settings). That's very likely why the first attempt felt broken.
+Guest settings). That's very likely why the first attempt felt broken. Note the cost:
+each guest needs their own Premium.
 
 **Tailscale isn't needed, and wouldn't work anyway.**
 
@@ -54,8 +55,10 @@ but everyone logs out of their own Spotify), and a DIY web remote on the Spotify
 
 - **Guest controls are off by default.** Jam details → Guest settings → allow guests to
   control playback. Without it guests can queue but never skip.
-- **Joining in person is free; joining remotely needs Premium.** Get everyone into the Jam
-  at the meeting point, phones held together, before rolling out.
+- **Every admin needs their own Premium.** Joining a Jam from a distance requires it, and
+  Free guests appear not to get playback control at all — they can queue and nothing more.
+  No Bluetooth or proximity is involved anywhere: admins tap a link over mobile data.
+  This single fact picks the plan — if any admin is on Free, use one of the fallbacks.
 - **If the host leaves the Jam or closes Spotify, the Jam ends for everyone.** Music keeps
   playing; every remote goes dead until it's restarted and the link reshared.
 - Download the playlist offline on the disco phone — playback then survives coverage
