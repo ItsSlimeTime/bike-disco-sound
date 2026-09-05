@@ -682,13 +682,36 @@ footer a{color:#B9C0CE}
   </div>
 
   <div class="col">
+    <h3 style="margin:0 0 1rem;font-size:1.24rem">What a Free account can actually do</h3>
+    <p>Assuming everyone is on Premium, none of this bites — but it's worth knowing exactly where the line falls, because one row of it decides the whole design.</p>
+  </div>
+
+  <div class="figwrap">
+    <figure class="fig">
+      <div class="scrollx">
+      <table>
+        <thead><tr><th>In a Jam, can you&hellip;</th><th>Free</th><th>Premium</th></tr></thead>
+        <tbody>
+          <tr><td>Start and host the Jam</td><td><span style="color:var(--reflector)">No</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
+          <tr><td>Join by link, from a distance</td><td><span style="color:var(--reflector)">No</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
+          <tr><td>Join in person, phones together</td><td><span style="color:var(--sodium)">Yes</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
+          <tr><td>Add songs to the queue</td><td><span style="color:var(--sodium)">Yes</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
+          <tr><td>Pause, skip, control playback</td><td><span style="color:var(--muted)">Undocumented — reported as no</span></td><td><span style="color:var(--sodium)">Yes, with guest controls on</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <figcaption><b>The first four rows are Spotify's own documentation.</b> The last one is not: Spotify never states whether a Free guest can control playback, and third-party reporting says they cannot. Don't build a plan on it.</figcaption>
+    </figure>
+  </div>
+
+  <div class="col">
     <div class="callout callout--warn">
-      <span class="tag">Every admin needs their own Premium</span>
-      <p>This is the price of keeping your own account, and it's worth checking before you plan around it. Joining a Jam from a distance — the only kind of joining that happens on a moving parade — requires the guest to have Premium. Reports also conflict over whether Free guests can control playback <em>at all</em>. Assume they can't: a Free admin can add to the queue, and should not be counted on as a working remote.</p>
+      <span class="tag">On a parade, row two settles it</span>
+      <p>Every join on a moving parade is a remote join — nobody is holding their phone against the sound bike at 20 km/h. And remote joining requires Premium, full stop. So the undocumented row never even comes up: <strong>every admin needs their own Premium</strong>, and the only Free-account route is joining in person at the pub before you roll out, which then rests on exactly the row nobody can confirm.</p>
     </div>
     <div class="callout callout--go" style="margin-top:1.2rem">
       <span class="tag">This one fact picks your plan</span>
-      <p>If all your admins already pay for Premium, use a Jam and you're done. If any of them don't, a Jam quietly won't work for that person — and both fallbacks further down fix it: a shared account means only <em>one</em> Premium exists in the whole system, and the DIY web remote needs no admin accounts at all.</p>
+      <p>If all your admins already pay for Premium — the likely case — use a Jam and you're done. If any of them don't, a Jam quietly won't work for that person, and both fallbacks further down fix it: a shared account means only <em>one</em> Premium exists in the whole system, and the DIY web remote needs no admin accounts at all.</p>
     </div>
   </div>
 </section>
@@ -891,7 +914,7 @@ footer a{color:#B9C0CE}
           <tr>
             <td>One admin can queue but never skip</td>
             <td>Their added songs appear, their skips don't</td>
-            <td>Either guest controls are off, or <b>that admin is on a Free account</b>. Free guests don't get playback control — that person needs Premium.</td>
+            <td>Either guest controls are off, or <b>that admin is on a Free account</b>. Free guests can add to the queue; controlling playback is undocumented and reported not to work. That person needs Premium.</td>
           </tr>
           <tr>
             <td>Someone wants in mid-ride</td>

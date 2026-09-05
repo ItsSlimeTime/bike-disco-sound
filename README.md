@@ -55,10 +55,20 @@ but everyone logs out of their own Spotify), and a DIY web remote on the Spotify
 
 - **Guest controls are off by default.** Jam details → Guest settings → allow guests to
   control playback. Without it guests can queue but never skip.
-- **Every admin needs their own Premium.** Joining a Jam from a distance requires it, and
-  Free guests appear not to get playback control at all — they can queue and nothing more.
-  No Bluetooth or proximity is involved anywhere: admins tap a link over mobile data.
-  This single fact picks the plan — if any admin is on Free, use one of the fallbacks.
+- **Every admin needs their own Premium.** What a Free account can do in a Jam:
+
+  | In a Jam, can you… | Free | Premium |
+  |---|---|---|
+  | Start and host the Jam | No | Yes |
+  | Join by link, from a distance | **No** | Yes |
+  | Join in person, phones together | Yes | Yes |
+  | Add songs to the queue | Yes | Yes |
+  | Pause, skip, control playback | *Undocumented — reported as no* | Yes, with guest controls on |
+
+  The first four rows are Spotify's own documentation; the last is not. On a parade every
+  join is a remote join, so row two settles it: **every admin needs Premium**. No Bluetooth
+  or proximity is involved anywhere — admins tap a link over mobile data. If any admin is
+  on Free, use one of the fallbacks instead.
 - **If the host leaves the Jam or closes Spotify, the Jam ends for everyone.** Music keeps
   playing; every remote goes dead until it's restarted and the link reshared.
 - Download the playlist offline on the disco phone — playback then survives coverage
