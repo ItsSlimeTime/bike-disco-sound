@@ -1,83 +1,60 @@
 # The Sound Bike
 
-A scrollytelling explainer for the Dublin bike disco crew: how to run one playlist
-across a parade of 20–100 cyclists, and let 2–5 people control it from anywhere
-in the line.
+A short visual explainer for the Dublin bike disco crew: how the sound gets down a
+20–100 bike parade, and who gets to press skip.
 
 **Live site:** https://itsslimetime.github.io/bike-disco-sound/
 
-Single static page. No build step, no dependencies. `index.html` is the whole thing.
+Single static page, no build step, no dependencies. `index.html` is the whole thing.
+Diagram-led and deliberately brief — roughly 1,200 words.
 
-## The short version
+## The rig
 
-Everyone keeps their own Spotify account. That rules out Spotify Connect and makes
-**Spotify Jam** the answer.
+Today: iPhone → **Bluetooth** → SoundBoks → minijack cable → SKAA transmitter → speakers,
+with a second SKAA unit in **receiver mode** relaying to a further cluster.
 
-**Spotify Connect is same-account only.** There is no tier or setting that lets one
-account control another account's playback. Family members in the same room can't do it
-without logging out and back in as the same account.
+Conor's proposal — wire the phone straight into the SKAA transmitter — is the right call.
+It deletes the only variable-latency hop in the chain (Bluetooth wanders 120–200 ms; SKAA
+is a fixed 36 ms) along with a battery, a pairing and a thing that can be switched off.
 
-**Spotify Jam is the cross-account mechanism.** Guests keep their own accounts and can
-play, pause, skip and queue — but **guest controls are OFF by default** (Jam details →
-Guest settings). That's very likely why the first attempt felt broken. Note the cost:
-each guest needs their own Premium.
+Notes:
 
-**Tailscale isn't needed, and wouldn't work anyway.**
-
-1. Jam and Connect both route through Spotify's servers, not your LAN. No shared network
-   is involved at any point.
-2. A tailnet couldn't substitute for a LAN regardless — local discovery is multicast/mDNS,
-   which Tailscale does not carry (open issues
-   [#11134](https://github.com/tailscale/tailscale/issues/11134),
-   [#1013](https://github.com/tailscale/tailscale/issues/1013)).
-
-**Jam's earlier failure was misdiagnosed.** In a Jam every participant's phone decodes its
-own stream; several phones each feeding a speaker drift by a reported 3–7 seconds. That's a
-"too many devices making sound" problem, not a connectivity fault — and fixing the count is
-exactly what makes Jam viable.
-
-**The architecture** — two planes that never touch:
-
-| | Carries | Over | Needs internet |
-|---|---|---|---|
-| Control plane | play / pause / skip / queue | Spotify's servers (a Jam) | Yes, both ends |
-| Audio plane | the actual sound | SKAA, 2.4 GHz radio | No |
-
-One phone cabled to the SKAA transmitter hosts the Jam and is the only device on the parade
-allowed to make a sound. Everyone else joins on their own account, sets their volume to zero,
-and acts purely as a remote.
-
-Fallbacks documented on the page: a shared **Bike Disco** account with Connect (bulletproof,
-but everyone logs out of their own Spotify), and a DIY web remote on the Spotify Web API
-(admins need no account at all, but it needs a small backend).
-
-## Gotchas the page covers
-
-- **Guest controls are off by default.** Jam details → Guest settings → allow guests to
-  control playback. Without it guests can queue but never skip.
-- **Every admin needs their own Premium.** What a Free account can do in a Jam:
-
-  | In a Jam, can you… | Free | Premium |
-  |---|---|---|
-  | Start and host the Jam | No | Yes |
-  | Join by link, from a distance | **No** | Yes |
-  | Join in person, phones together | Yes | Yes |
-  | Add songs to the queue | Yes | Yes |
-  | Pause, skip, control playback | *Undocumented — reported as no* | Yes, with guest controls on |
-
-  The first four rows are Spotify's own documentation; the last is not. On a parade every
-  join is a remote join, so row two settles it: **every admin needs Premium**. No Bluetooth
-  or proximity is involved anywhere — admins tap a link over mobile data. If any admin is
-  on Free, use one of the fallbacks instead.
-- **If the host leaves the Jam or closes Spotify, the Jam ends for everyone.** Music keeps
-  playing; every remote goes dead until it's restarted and the link reshared.
-- Download the playlist offline on the disco phone — playback then survives coverage
-  blackspots (remote control doesn't, but the music never stops).
-- Shared volume control doesn't apply to wired or Bluetooth outputs. Do volume at the
+- **SOUNDBOKS 4, Mix and Go have SKAA built in** and can join a cluster without their own
   transmitter.
-- **SKAA reaches ~45 m and drives at most 4 receivers per transmitter.** A 150–200 m parade
-  cannot be covered from the front — ride the sound bike in the *middle* and the same range
-  covers ~90 m. More transmitters add speakers, not distance.
+- One transmitter feeds **up to 4 receivers**, held within **40 µs** of each other, out to
+  about **45 m**.
+- Range extends by **relay**, not just by adding transmitters: a SKAA unit in receiver mode
+  feeds a speaker by cable, and that speaker starts a fresh cluster. Each relay adds 36 ms,
+  which is less than the sound-travel time between clusters that far apart — so it's
+  inaudible.
+- **Raise the aerials.** 2.4 GHz is absorbed by water and a crowd is mostly water. A 200 g
+  transmitter on a short mast beats lifting a 16 kg speaker, and buys more range than
+  anything else cheap.
+
+## Who controls the music
+
+**Spotify Connect is same-account only** — no tier or setting changes that. **Spotify Jam**
+is the cross-account route: the sound bike hosts, everyone else keeps their own Spotify.
+
+- **Guest controls are OFF by default** (Jam details → Guest settings). Very likely why the
+  first attempt felt broken: guests could queue but never skip.
+- **Every admin needs their own Premium.** A Free account can join in person and add songs,
+  but can't host, can't join by link from a distance, and reportedly can't skip. On a parade
+  every join is a distant one.
+- **No shared network is needed.** Jam runs over ordinary mobile data through Spotify's
+  servers. Tailscale wouldn't help regardless — it doesn't carry multicast/mDNS
+  ([#11134](https://github.com/tailscale/tailscale/issues/11134)).
+
+## The one rule
+
+**Only one device makes a sound.** In a Jam every phone streams its own copy; that's fine
+until two of them drive speakers, at which point two clocks drift apart — the reported 3–7
+seconds that sank the first attempt. Speakers on one SKAA transmitter physically cannot
+drift. Extra phones can.
+
+Fallbacks on the page: one shared **Bike Disco** account with Connect (bulletproof, but
+everyone signs out of their own Spotify), and a three-button web remote on the Spotify Web
+API (admins need no account at all, but it needs a small backend).
 
 ## Local preview
 
@@ -87,8 +64,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Sources
 
-Spotify [Connect](https://support.spotify.com/us/article/spotify-connect/) and
-[Jam](https://support.spotify.com/us/article/jam/) documentation; Spotify Community
-threads on [cross-network control](https://community.spotify.com/t5/Other-Podcasts-Partners-etc/Devices-can-be-controlled-from-any-network/td-p/4428681)
-and [Jam drift](https://community.spotify.com/t5/Live-Ideas/Add-a-Manual-Audio-Delay-Sync-Offset-Slider-for-Spotify-Jam/idi-p/7353774);
+Spotify [Jam](https://support.spotify.com/us/article/jam/) and
+[Connect](https://support.spotify.com/us/article/spotify-connect/) documentation;
+[SOUNDBOKS on SKAA](https://soundboks.com/blogs/in-tune/what-is-skaa-technology-and-how-does-it-make-your-soundboks-even-better);
 [SKAA](https://skaa.com/pages/transmitters) published specifications.

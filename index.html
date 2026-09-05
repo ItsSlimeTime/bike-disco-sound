@@ -229,9 +229,9 @@ footer a{color:#B9C0CE}
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="hero__inner">
     <div class="col col--wide">
-      <p class="dateline"><span>Dublin</span><span><b>A technical brief for the bike disco crew</b></span><span>9 min read</span></p>
+      <p class="dateline"><span>Dublin</span><span><b>A technical brief for the bike disco crew</b></span><span>4 min read</span></p>
       <h1>One playlist.<br>Ninety bikes.<br><span class="dim">Nobody can reach<br>the phone.</span></h1>
-      <p class="hero__sub">The speakers stopped cutting out. The harder problem is who gets to press skip, without anyone surrendering their Spotify account — and the answer turns out to have nothing to do with building a network.</p>
+      <p class="hero__sub">How the sound gets down the line, and who gets to press skip.</p>
     </div>
     <div class="hero__art" aria-hidden="true">
       <svg viewBox="0 0 1200 170" role="presentation">
@@ -277,880 +277,379 @@ footer a{color:#B9C0CE}
     </div>
   </div>
 </header>
-
-<!-- ============ 1. THE RIDE ============ -->
+<!-- ============ 1. THE RIG ============ -->
 <section class="chapter">
   <div class="col">
-    <p class="eyebrow">The ride</p>
-    <h2 class="chapter__h">Two problems that look like one</h2>
-    <p class="standfirst">A bike disco is a parade with a soundtrack. Somewhere between twenty and a hundred cyclists roll through the city in a line, and the whole thing only works if everyone hears the same song at the same moment.</p>
-    <p>That single requirement hides two completely separate engineering problems, and the crew has already solved one of them.</p>
-    <p><strong>Problem one is getting sound out.</strong> A line of a hundred bikes is long — call it two hundred metres nose to tail. One speaker at the front is useless to the back half. You need several speakers spread down the line, all playing the same audio, tightly in step. Solved: they switched from Bluetooth to <span class="mono" style="font-size:.9em">SKAA</span>, and the cutting out stopped.</p>
-    <p><strong>Problem two is deciding what plays.</strong> Two to five people need to skip a track, kill the volume for a junction, or queue something for the bridge — from wherever they happen to be in the line. That one is still open, and it is the reason for this page.</p>
-    <p>The two problems feel related because they both sound like "wireless". They aren't. Confusing them is exactly what sent the last attempt off a cliff.</p>
-  </div>
-</section>
-
-<div class="pull"><p>The music travels by <span class="q">radio.</span><br>The instructions travel by <span class="q">internet.</span><br>They never touch.</p></div>
-
-<!-- ============ 2. THE WALL AT EIGHT METRES ============ -->
-<section class="chapter" style="padding-bottom:0">
-  <div class="col">
-    <p class="eyebrow">The problem they already fixed</p>
-    <h2 class="chapter__h">The wall at eight metres</h2>
-    <p>Worth understanding, because it explains why the rig is built the way it is. Bluetooth was never designed to cross a moving parade.</p>
-  </div>
-</section>
-
-<section class="scrolly" data-scrolly="bt">
-  <div class="scrolly__fig">
-    <figure class="fig">
-      <svg id="btsvg" viewBox="0 0 860 340" role="img" aria-label="As the speaker moves away from the phone, the Bluetooth link degrades and drops out at roughly eight metres.">
-        <defs>
-          <marker id="ah-cy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10 z" fill="#57D9E8"/>
-          </marker>
-        </defs>
-
-        <!-- phone / source -->
-        <g transform="translate(50,110)">
-          <rect x="0" y="0" width="36" height="62" rx="5" class="s-box"/>
-          <rect x="5" y="6" width="26" height="42" rx="2" fill="#070B16"/>
-          <circle cx="18" cy="27" r="7" class="s-amber-s" stroke-width="1.4"/>
-          <path d="M15 24 L22 27 L15 30 z" class="s-amber"/>
-          <text class="s-name" x="18" y="80" text-anchor="middle">PHONE</text>
-        </g>
-
-        <!-- the link -->
-        <line id="btLink" x1="92" y1="141" x2="180" y2="141" class="s-cyan-s" stroke-width="2" marker-end="url(#ah-cy)"/>
-        <text id="btLinkLab" class="s-lab-s" x="136" y="130" text-anchor="middle" style="fill:#57D9E8">BLUETOOTH 2.4 GHz</text>
-
-        <!-- the moving speaker -->
-        <g id="btSpk" transform="translate(186,110)">
-          <rect x="0" y="0" width="46" height="64" rx="4" class="s-box"/>
-          <circle cx="23" cy="22" r="12" fill="none" stroke="var(--line)" stroke-width="1.4"/>
-          <circle cx="23" cy="22" r="4" fill="var(--line)"/>
-          <circle cx="23" cy="48" r="6" fill="none" stroke="var(--line)" stroke-width="1.2"/>
-          <text class="s-name" x="23" y="82" text-anchor="middle">SPEAKER</text>
-          <g id="btBars" transform="translate(4,-16)">
-            <rect x="0"  y="8"  width="4" height="6"  class="s-cyan"/>
-            <rect x="8"  y="5"  width="4" height="9"  class="s-cyan"/>
-            <rect x="16" y="2"  width="4" height="12" class="s-cyan"/>
-            <rect x="24" y="-1" width="4" height="15" class="s-cyan"/>
-            <rect x="32" y="-4" width="4" height="18" class="s-cyan"/>
-          </g>
-        </g>
-
-        <!-- dropout badge -->
-        <g id="btBadge" transform="translate(430,42)" opacity="0">
-          <rect x="-72" y="-15" width="144" height="30" rx="3" fill="#3A1420" stroke="#FF4F6E" stroke-width="1"/>
-          <text class="s-lab" x="0" y="4" text-anchor="middle" style="fill:#FF4F6E;letter-spacing:.14em">AUDIO DROPPING OUT</text>
-        </g>
-
-        <!-- ruler -->
-        <g transform="translate(0,258)">
-          <line x1="110" y1="0" x2="790" y2="0" class="s-line"/>
-          <g class="s-lab-s" text-anchor="middle">
-            <line x1="110" y1="0" x2="110" y2="7" class="s-line"/><text x="110" y="22">0 m</text>
-            <line x1="246" y1="0" x2="246" y2="7" class="s-line"/><text x="246" y="22">4</text>
-            <line x1="382" y1="0" x2="382" y2="7" class="s-line"/><text x="382" y="22">8</text>
-            <line x1="518" y1="0" x2="518" y2="7" class="s-line"/><text x="518" y="22">12</text>
-            <line x1="654" y1="0" x2="654" y2="7" class="s-line"/><text x="654" y="22">16</text>
-            <line x1="790" y1="0" x2="790" y2="7" class="s-line"/><text x="790" y="22">20 m</text>
-          </g>
-        </g>
-        <line x1="382" y1="60" x2="382" y2="258" class="s-red-s" stroke-width="1" stroke-dasharray="3 5" opacity=".8"/>
-        <text class="s-lab-s" x="390" y="74" style="fill:#FF4F6E">≈ 8 m — where it started cutting out</text>
-
-        <!-- readout -->
-        <g transform="translate(790,110)" text-anchor="end">
-          <text id="btDist" class="s-big" x="0" y="0">0.0 m</text>
-          <text id="btState" class="s-lab" x="0" y="20" style="fill:#57D9E8">LINK STABLE</text>
-        </g>
-      </svg>
-      <figcaption><b>Scroll to ride away from the phone.</b> Bluetooth's practical range collapses under exactly the conditions a parade creates: bodies in the way, dozens of phones saturating the 2.4 GHz band, and a speaker that keeps moving.</figcaption>
-    </figure>
-  </div>
-  <div class="scrolly__steps">
-    <div class="step" data-step="0">
-      <span class="step__k">At the front</span>
-      <p>Right beside the phone, everything is fine. This is why it always works in the pub car park when you're testing it.</p>
-    </div>
-    <div class="step" data-step="1">
-      <span class="step__k">Eight metres back</span>
-      <p>Roughly four bike-lengths. The link starts stuttering — a fraction of a second of silence, then a chunk of the chorus missing. On a moving parade this is constant.</p>
-    </div>
-    <div class="step" data-step="2">
-      <span class="step__k">Twenty metres back</span>
-      <p>Gone. And twenty metres is nothing: a hundred cyclists in formation stretch ten times that far. Bluetooth was never in the running.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 3. WHAT SKAA CHANGED ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">The fix they found</p>
-    <h2 class="chapter__h">One transmitter, four speakers, locked together</h2>
-    <p>SKAA is a 2.4 GHz audio protocol that solves a different problem from Bluetooth. Bluetooth pairs one source to one sink and does its best. SKAA takes one transmitter and feeds up to four receivers <em>at once</em>, holding them in step with each other to within forty microseconds — about a thousand times tighter than the human ear can detect.</p>
-    <p>The other half of the win is that its delay is <strong>fixed</strong>. Bluetooth's latency wanders between roughly 120 and 200 milliseconds depending on the handset, the codec and the interference. SKAA always takes the same 36 milliseconds. A predictable delay is one you can ignore; a wandering one is what makes two speakers sound like a flanger.</p>
+    <p class="eyebrow">The rig</p>
+    <h2 class="chapter__h">One weak link</h2>
+    <p class="standfirst">Right now the phone reaches the first speaker over Bluetooth, and that speaker feeds the SKAA transmitter by cable. Everything after that is rock solid. The Bluetooth hop is the fragile bit.</p>
   </div>
 
   <div class="figwrap">
     <figure class="fig">
       <div class="scrollx">
-      <svg viewBox="0 0 860 280" role="img" aria-label="Bluetooth connects one phone to one speaker; SKAA connects one transmitter to up to four speakers held in sync." style="min-width:600px">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Today the phone reaches a SoundBoks over Bluetooth which feeds the SKAA transmitter by cable; wiring the phone straight to the transmitter removes that hop." style="min-width:640px">
         <defs>
-          <marker id="ah-mut" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8A94A9"/></marker>
-          <marker id="ah-am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#F7A93B"/></marker>
+          <marker id="a-am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#F7A93B"/></marker>
+          <marker id="a-rd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#FF4F6E"/></marker>
+          <marker id="a-mu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8A94A9"/></marker>
         </defs>
+        <line x1="440" y1="10" x2="440" y2="240" class="s-line" stroke-dasharray="2 6"/>
 
-        <line x1="430" y1="8" x2="430" y2="272" class="s-line" stroke-dasharray="2 6"/>
-
-        <!-- LEFT: bluetooth -->
-        <text class="s-lab-s" x="24" y="22">WHAT THEY HAD</text>
-        <text class="s-big" x="24" y="50" style="font-size:19px;fill:#8A94A9">BLUETOOTH</text>
-        <g transform="translate(52,128)">
-          <rect x="0" y="0" width="34" height="58" rx="5" class="s-box"/>
-          <rect x="5" y="5" width="24" height="40" rx="2" fill="#070B16"/>
-          <text class="s-lab-s" x="17" y="76" text-anchor="middle">PHONE</text>
-        </g>
-        <line x1="94" y1="157" x2="236" y2="157" stroke="#8A94A9" stroke-width="1.6" marker-end="url(#ah-mut)"/>
-        <text class="s-lab-s" x="165" y="147" text-anchor="middle">one link</text>
-        <g transform="translate(244,126)">
-          <rect x="0" y="0" width="44" height="62" rx="4" class="s-box"/>
-          <circle cx="22" cy="22" r="11" fill="none" stroke="#8A94A9" stroke-width="1.3"/>
-          <circle cx="22" cy="22" r="3.5" fill="#8A94A9"/>
-          <circle cx="22" cy="47" r="5.5" fill="none" stroke="#8A94A9" stroke-width="1.1"/>
-          <text class="s-lab-s" x="22" y="80" text-anchor="middle">1 SPEAKER</text>
-        </g>
-        <text class="s-lab-s" x="24" y="252" style="fill:#FF4F6E">✕  falls over past ≈ 8 m</text>
-
-        <!-- RIGHT: skaa -->
-        <text class="s-lab-s" x="462" y="22" style="fill:#F7A93B">WHAT THEY HAVE NOW</text>
-        <text class="s-big" x="462" y="50" style="font-size:19px;fill:#F7A93B">SKAA</text>
-        <g transform="translate(478,120)">
-          <rect x="0" y="0" width="38" height="58" rx="4" class="s-box" style="stroke:#F7A93B"/>
-          <circle cx="19" cy="20" r="6" class="s-amber-s" stroke-width="1.3"/>
-          <path d="M13 33 h12 M13 39 h12" stroke="#F7A93B" stroke-width="1.2"/>
-          <text class="s-lab-s" x="19" y="74" text-anchor="middle" style="fill:#F7A93B">TRANSMITTER</text>
-        </g>
-        <g stroke="#F7A93B" stroke-width="1.5" fill="none" opacity=".85">
-          <path d="M522 140 C 600 140, 660 62, 742 62" marker-end="url(#ah-am)"/>
-          <path d="M522 146 C 600 146, 660 118, 742 118" marker-end="url(#ah-am)"/>
-          <path d="M522 152 C 600 152, 660 174, 742 174" marker-end="url(#ah-am)"/>
-          <path d="M522 158 C 600 158, 660 230, 742 230" marker-end="url(#ah-am)"/>
+        <!-- TODAY -->
+        <text class="s-lab-s" x="20" y="24">TODAY</text>
+        <g transform="translate(20,82)"><rect x="0" y="0" width="28" height="46" rx="4" class="s-box"/><rect x="4" y="4" width="20" height="31" rx="1.5" fill="#070B16"/></g>
+        <text class="s-lab-s" x="34" y="146" text-anchor="middle">PHONE</text>
+        <line x1="54" y1="105" x2="98" y2="105" stroke="#FF4F6E" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#a-rd)"/>
+        <text class="s-lab-s" x="76" y="96" text-anchor="middle" style="fill:#FF4F6E">BLUETOOTH</text>
+        <g transform="translate(104,74)"><rect x="0" y="0" width="50" height="62" rx="4" class="s-box"/><circle cx="25" cy="24" r="12" fill="none" stroke="#8A94A9" stroke-width="1.3"/><circle cx="25" cy="24" r="4" fill="#8A94A9"/><circle cx="25" cy="48" r="6" fill="none" stroke="#8A94A9" stroke-width="1.1"/></g>
+        <text class="s-lab-s" x="129" y="152" text-anchor="middle">SOUNDBOKS</text>
+        <line x1="160" y1="105" x2="198" y2="105" stroke="#8A94A9" stroke-width="1.6" marker-end="url(#a-mu)"/>
+        <text class="s-lab-s" x="179" y="96" text-anchor="middle">cable</text>
+        <g transform="translate(204,86)"><rect x="0" y="0" width="54" height="38" rx="3" class="s-box"/><circle cx="27" cy="14" r="5" fill="none" stroke="#8A94A9" stroke-width="1.2"/><path d="M20 26 h14" stroke="#8A94A9" stroke-width="1.2"/></g>
+        <text class="s-lab-s" x="231" y="140" text-anchor="middle">SKAA TX</text>
+        <g stroke="#8A94A9" stroke-width="1.4" fill="none">
+          <path d="M262 100 C 296 100, 300 70, 328 70" marker-end="url(#a-mu)"/>
+          <path d="M262 105 C 296 105, 300 105, 328 105" marker-end="url(#a-mu)"/>
+          <path d="M262 110 C 296 110, 300 142, 328 142" marker-end="url(#a-mu)"/>
         </g>
         <g>
-          <g transform="translate(750,44)"><rect x="0" y="0" width="36" height="36" rx="3" class="s-box"/><circle cx="18" cy="18" r="8" fill="none" stroke="#F7A93B" stroke-width="1.2"/></g>
-          <g transform="translate(750,100)"><rect x="0" y="0" width="36" height="36" rx="3" class="s-box"/><circle cx="18" cy="18" r="8" fill="none" stroke="#F7A93B" stroke-width="1.2"/></g>
-          <g transform="translate(750,156)"><rect x="0" y="0" width="36" height="36" rx="3" class="s-box"/><circle cx="18" cy="18" r="8" fill="none" stroke="#F7A93B" stroke-width="1.2"/></g>
-          <g transform="translate(750,212)"><rect x="0" y="0" width="36" height="36" rx="3" class="s-box"/><circle cx="18" cy="18" r="8" fill="none" stroke="#F7A93B" stroke-width="1.2"/></g>
+          <g transform="translate(334,55)"><rect x="0" y="0" width="30" height="30" rx="3" class="s-box"/><circle cx="15" cy="15" r="7" fill="none" stroke="#8A94A9" stroke-width="1.1"/></g>
+          <g transform="translate(334,90)"><rect x="0" y="0" width="30" height="30" rx="3" class="s-box"/><circle cx="15" cy="15" r="7" fill="none" stroke="#8A94A9" stroke-width="1.1"/></g>
+          <g transform="translate(334,127)"><rect x="0" y="0" width="30" height="30" rx="3" class="s-box"/><circle cx="15" cy="15" r="7" fill="none" stroke="#8A94A9" stroke-width="1.1"/></g>
         </g>
-        <text class="s-lab-s" x="806" y="140" text-anchor="middle" transform="rotate(90 806 140)" style="fill:#F7A93B">4 SPEAKERS · ±40 µs APART</text>
-        <text class="s-lab-s" x="462" y="252" style="fill:#F7A93B">✓  holds to ≈ 45 m, delay never moves</text>
+        <text class="s-lab-s" x="349" y="176" text-anchor="middle">SPEAKERS</text>
+        <text class="s-lab-s" x="20" y="222" style="fill:#FF4F6E">✕  an extra hop, and its delay wanders</text>
+
+        <!-- BETTER -->
+        <text class="s-lab-s" x="470" y="24" style="fill:#F7A93B">WHAT CONOR WANTS</text>
+        <g transform="translate(470,82)"><rect x="0" y="0" width="28" height="46" rx="4" class="s-box" style="stroke:#F7A93B"/><rect x="4" y="4" width="20" height="31" rx="1.5" fill="#070B16"/></g>
+        <text class="s-lab-s" x="484" y="146" text-anchor="middle" style="fill:#F7A93B">PHONE</text>
+        <line x1="504" y1="105" x2="576" y2="105" stroke="#F7A93B" stroke-width="1.8" marker-end="url(#a-am)"/>
+        <text class="s-lab-s" x="540" y="96" text-anchor="middle" style="fill:#F7A93B">one cable</text>
+        <g transform="translate(582,86)"><rect x="0" y="0" width="54" height="38" rx="3" class="s-box" style="stroke:#F7A93B"/><circle cx="27" cy="14" r="5" fill="none" stroke="#F7A93B" stroke-width="1.2"/><path d="M20 26 h14" stroke="#F7A93B" stroke-width="1.2"/></g>
+        <text class="s-lab-s" x="609" y="140" text-anchor="middle" style="fill:#F7A93B">SKAA TX</text>
+        <g stroke="#F7A93B" stroke-width="1.5" fill="none">
+          <path d="M640 100 C 674 100, 678 70, 706 70" marker-end="url(#a-am)"/>
+          <path d="M640 105 C 674 105, 678 105, 706 105" marker-end="url(#a-am)"/>
+          <path d="M640 110 C 674 110, 678 142, 706 142" marker-end="url(#a-am)"/>
+        </g>
+        <g>
+          <g transform="translate(712,55)"><rect x="0" y="0" width="30" height="30" rx="3" class="s-box"/><circle cx="15" cy="15" r="7" fill="none" stroke="#F7A93B" stroke-width="1.1"/></g>
+          <g transform="translate(712,90)"><rect x="0" y="0" width="30" height="30" rx="3" class="s-box"/><circle cx="15" cy="15" r="7" fill="none" stroke="#F7A93B" stroke-width="1.1"/></g>
+          <g transform="translate(712,127)"><rect x="0" y="0" width="30" height="30" rx="3" class="s-box"/><circle cx="15" cy="15" r="7" fill="none" stroke="#F7A93B" stroke-width="1.1"/></g>
+        </g>
+        <text class="s-lab-s" x="727" y="176" text-anchor="middle" style="fill:#F7A93B">SPEAKERS</text>
+        <text class="s-lab-s" x="470" y="222" style="fill:#F7A93B">✓  one hop, fixed 36 ms, one less box</text>
       </svg>
       </div>
-      <figcaption><b>The difference is the fan-out.</b> Bluetooth adds a speaker by adding a whole second, independent link. SKAA sends one signal that several receivers lock onto — which is why the speakers stay in step with each other no matter how far apart they are on the road.</figcaption>
+      <figcaption><b>Conor's version is the right call.</b> Bluetooth's delay wanders between 120 and 200 ms; SKAA's 36 ms never moves. Wiring the phone straight in also deletes a battery, a pairing and a thing that can be switched off by accident.</figcaption>
     </figure>
   </div>
 
   <div class="col">
-    <div class="scrollx">
-    <table>
-      <thead><tr><th>&nbsp;</th><th>Bluetooth</th><th>SKAA</th></tr></thead>
-      <tbody>
-        <tr><td>Speakers per source</td><td>1</td><td><b>Up to 4</b></td></tr>
-        <tr><td>Usable range</td><td>~10 m, less through a crowd</td><td><b>≈ 45 m</b></td></tr>
-        <tr><td>Delay</td><td>120–200 ms, and it wanders</td><td><b>36 ms, fixed</b></td></tr>
-        <tr><td>Speaker-to-speaker sync</td><td>Not a feature</td><td><b>Within 40 µs</b></td></tr>
-        <tr><td>Needs Wi-Fi or a network</td><td>No</td><td><b>No</b></td></tr>
-      </tbody>
-    </table>
-    </div>
+    <ul class="ticks">
+      <li><strong>SoundBoks 4, Mix and Go have SKAA built in</strong> — they can join the cluster without a transmitter of their own.</li>
+      <li>One transmitter feeds <strong>up to four</strong> speakers, held within 40 millionths of a second of each other.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 2. RANGE ============ -->
+<section class="chapter" style="padding-top:0">
+  <div class="col">
+    <p class="eyebrow">Range</p>
+    <h2 class="chapter__h">45 metres, then relay</h2>
+    <p>One transmitter covers about 45 metres. To go further, a second SKAA unit set to <strong>receiver mode</strong> picks up the signal, feeds a speaker by cable, and that speaker starts a fresh cluster — exactly what Peter already does.</p>
   </div>
 
-  <div class="col" style="margin-top:2.2rem">
+  <div class="figwrap">
+    <figure class="fig">
+      <div class="scrollx">
+      <svg viewBox="0 0 860 210" role="img" aria-label="A transmitter covers 45 metres; a SKAA unit in receiver mode relays to a second cluster further down the line." style="min-width:600px">
+        <rect x="30" y="66" width="300" height="52" fill="#F7A93B" opacity=".12"/>
+        <rect x="430" y="66" width="300" height="52" fill="#F7A93B" opacity=".12"/>
+        <line x1="20" y1="92" x2="840" y2="92" class="s-line"/>
+        <circle cx="60" cy="92" r="8" fill="#F7A93B"/>
+        <text class="s-lab-s" x="60" y="136" text-anchor="middle" style="fill:#F7A93B">SOUND BIKE</text>
+        <g fill="#F7A93B" opacity=".9">
+          <circle cx="150" cy="92" r="4"/><circle cx="230" cy="92" r="4"/><circle cx="305" cy="92" r="4"/>
+          <circle cx="520" cy="92" r="4"/><circle cx="600" cy="92" r="4"/><circle cx="690" cy="92" r="4"/>
+        </g>
+        <text class="s-lab-s" x="180" y="58" text-anchor="middle">CLUSTER 1 · ≈45 m</text>
+        <text class="s-lab-s" x="580" y="58" text-anchor="middle">CLUSTER 2 · ≈45 m</text>
+        <!-- relay -->
+        <rect x="344" y="74" width="72" height="36" rx="3" class="s-box" style="stroke:#57D9E8"/>
+        <text class="s-lab-s" x="380" y="90" text-anchor="middle" style="fill:#57D9E8">RECEIVER</text>
+        <text class="s-lab-s" x="380" y="102" text-anchor="middle" style="fill:#57D9E8">MODE</text>
+        <text class="s-lab-s" x="380" y="136" text-anchor="middle" style="fill:#57D9E8">relays the signal on</text>
+        <text class="s-lab-s" x="380" y="150" text-anchor="middle">+36 ms</text>
+        <g class="s-lab-s" text-anchor="middle">
+          <line x1="20" y1="176" x2="840" y2="176" class="s-line"/>
+          <line x1="20" y1="176" x2="20" y2="182" class="s-line"/><text x="20" y="196">0 m</text>
+          <line x1="430" y1="176" x2="430" y2="182" class="s-line"/><text x="430" y="196">45</text>
+          <line x1="840" y1="176" x2="840" y2="182" class="s-line"/><text x="840" y="196">90 m</text>
+        </g>
+      </svg>
+      </div>
+      <figcaption><b>Each relay adds 36 ms.</b> That sounds bad and isn't: clusters that far apart are already further apart in sound-travel time than the delay you just added. Nobody standing in either one can tell.</figcaption>
+    </figure>
+  </div>
+
+  <div class="col">
+    <div class="callout callout--go">
+      <span class="tag">Free coverage</span>
+      <p>Ride the sound bike in the <strong>middle</strong> of the line rather than the front. Same kit, same relay, roughly twice the parade covered.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. AERIALS ============ -->
+<section class="chapter" style="padding-top:0">
+  <div class="col">
+    <p class="eyebrow">Aerials</p>
+    <h2 class="chapter__h">Get the signal over the heads</h2>
+    <p>Conor is right, and the physics backs him. 2.4 GHz is absorbed by water, and a crowd is mostly water. A line of riders between two aerials is a wall.</p>
+  </div>
+
+  <div class="figwrap">
+    <figure class="fig">
+      <div class="scrollx">
+      <svg viewBox="0 0 860 310" role="img" aria-label="At bike height the signal is absorbed by riders' bodies; raised on a short mast it clears their heads." style="min-width:600px">
+        <defs>
+          <g id="rider">
+            <rect x="-7" y="-20" width="14" height="30" rx="6" fill="#4A5570"/>
+            <circle cx="0" cy="-27" r="6" fill="#4A5570"/>
+          </g>
+        </defs>
+
+        <!-- through the crowd -->
+        <text class="s-lab-s" x="20" y="24" style="fill:#FF4F6E">AT BIKE HEIGHT — ABSORBED</text>
+        <line x1="20" y1="120" x2="840" y2="120" class="s-line"/>
+        <g><use href="#rider" x="220" y="120"/><use href="#rider" x="300" y="120"/><use href="#rider" x="380" y="120"/><use href="#rider" x="460" y="120"/><use href="#rider" x="540" y="120"/><use href="#rider" x="620" y="120"/></g>
+        <rect x="40" y="86" width="30" height="26" rx="3" class="s-box" style="stroke:#FF4F6E"/>
+        <text class="s-lab-s" x="55" y="136" text-anchor="middle" style="fill:#FF4F6E">TX</text>
+        <rect x="770" y="86" width="30" height="26" rx="3" class="s-box" style="stroke:#FF4F6E"/>
+        <text class="s-lab-s" x="785" y="136" text-anchor="middle" style="fill:#FF4F6E">RX</text>
+        <line x1="74" y1="99" x2="766" y2="99" stroke="#FF4F6E" stroke-width="1.6" stroke-dasharray="9 8" opacity=".85"/>
+        <g stroke="#FF4F6E" stroke-width="2" stroke-linecap="round">
+          <line x1="292" y1="91" x2="308" y2="107"/><line x1="308" y1="91" x2="292" y2="107"/>
+          <line x1="532" y1="91" x2="548" y2="107"/><line x1="548" y1="91" x2="532" y2="107"/>
+        </g>
+
+        <!-- over the top -->
+        <text class="s-lab-s" x="20" y="184" style="fill:#F7A93B">ON A SHORT MAST — CLEAR</text>
+        <line x1="20" y1="290" x2="840" y2="290" class="s-line"/>
+        <g><use href="#rider" x="220" y="290"/><use href="#rider" x="300" y="290"/><use href="#rider" x="380" y="290"/><use href="#rider" x="460" y="290"/><use href="#rider" x="540" y="290"/><use href="#rider" x="620" y="290"/></g>
+        <line x1="55" y1="290" x2="55" y2="222" stroke="#F7A93B" stroke-width="1.4"/>
+        <rect x="40" y="196" width="30" height="26" rx="3" class="s-box" style="stroke:#F7A93B"/>
+        <line x1="785" y1="290" x2="785" y2="222" stroke="#F7A93B" stroke-width="1.4"/>
+        <rect x="770" y="196" width="30" height="26" rx="3" class="s-box" style="stroke:#F7A93B"/>
+        <line x1="74" y1="209" x2="766" y2="209" stroke="#F7A93B" stroke-width="1.8"/>
+        <text class="s-lab-s" x="420" y="200" text-anchor="middle" style="fill:#F7A93B">clear line of sight, straight over everyone</text>
+      </svg>
+      </div>
+      <figcaption><b>The cheapest upgrade on this page.</b> A 200 g aerial on a flag-pole mast goes up easily. A 16 kg speaker does not.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 4. CONTROL ============ -->
+<section class="chapter">
+  <div class="col">
+    <p class="eyebrow">The control question</p>
+    <h2 class="chapter__h">Who gets to press skip</h2>
+    <p>Spotify Connect only ever lists devices signed into <em>your own</em> account, so it's out unless everybody shares one login. <strong>Spotify Jam</strong> is the version built for separate accounts: the sound bike's phone plays, everyone else keeps their own Spotify and gets a remote.</p>
+  </div>
+
+  <div class="figwrap">
+    <figure class="fig">
+      <div class="scrollx">
+      <table>
+        <thead><tr><th>&nbsp;</th><th>Connect</th><th>Jam</th></tr></thead>
+        <tbody>
+          <tr><td>Whose account</td><td>One shared login for everyone</td><td><b>Everyone keeps their own</b></td></tr>
+          <tr><td>Guests can skip &amp; pause</td><td>Yes</td><td>Yes — <b>once guest controls are on</b></td></tr>
+          <tr><td>Needs Wi-Fi</td><td>No</td><td>No</td></tr>
+          <tr><td>Each admin needs Premium</td><td>No, only the shared account</td><td><b>Yes</b></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <figcaption><b>Guest controls are off by default</b> — Jam details → Guest settings. That single toggle is very likely why it felt broken last time: guests could add songs but never skip one.</figcaption>
+    </figure>
+  </div>
+
+  <div class="col">
     <div class="callout">
-      <span class="tag">Worth knowing before you scale</span>
-      <p>Four receivers is a hard ceiling per transmitter. A hundred-bike parade may want more than four speakers spread down the line — that needs additional transmitters, all fed the same audio from the same phone through a splitter. <a href="#scale">More on that below</a>.</p>
+      <span class="tag">Free accounts</span>
+      <p>A Free account can join in person and add songs, but <strong>can't host, can't join by link from a distance, and reportedly can't skip.</strong> On a moving parade every join is a distant one — so assume each admin needs their own Premium.</p>
+    </div>
+    <div class="callout callout--go" style="margin-top:1.2rem">
+      <span class="tag">You don't need Tailscale</span>
+      <p>Jam runs through Spotify's servers over ordinary mobile data — no shared network at any point. A tailnet wouldn't help anyway: it can't carry the local-discovery traffic that would be the only reason to want one.</p>
     </div>
   </div>
 </section>
 
 <hr class="hr">
 
-<!-- ============ 4. THE PROBLEM THAT'S LEFT ============ -->
-<section class="chapter">
+<!-- ============ 5. THE ONE RULE ============ -->
+<section class="chapter" style="padding-bottom:0">
   <div class="col">
-    <p class="eyebrow">The problem that's left</p>
-    <h2 class="chapter__h">The phone is at the front. You are not.</h2>
-    <p>With SKAA the sound is handled. But the phone driving it is cable-tied to one bike at the head of the parade, and the people who need to change what's playing are scattered through the line.</p>
-    <p>The needs are ordinary: skip a track that isn't landing, drop the volume approaching a garda checkpoint or a residential street, queue the big one for the final stretch. What isn't ordinary is doing it from ninety metres back, while moving, in the dark.</p>
-    <p>There's also a hard constraint that shapes everything below: <strong>everyone has their own Spotify account</strong>, and nobody wants to surrender theirs for the night.</p>
-    <p>So the crew tried <strong>Spotify Jam</strong>. And it fell apart in a way that's worth looking at closely, because the failure has been misdiagnosed — and the wrong diagnosis leads straight to building a network you don't need.</p>
+    <p class="eyebrow">The one rule</p>
+    <h2 class="chapter__h">Only one device makes a sound</h2>
+    <p>This is what actually went wrong last time. In a Jam every phone streams its own copy — harmless, until two of them are driving speakers. Then there are two clocks, and they come apart.</p>
   </div>
 </section>
 
-<!-- ============ 5. WHY JAM FELL APART ============ -->
 <section class="scrolly" data-scrolly="jam">
   <div class="scrolly__fig">
     <figure class="fig">
-      <svg id="jamsvg" viewBox="0 0 860 400" role="img" aria-label="Four phones start a Jam in time, then drift apart by up to 1.2 seconds because each decodes its own audio stream.">
+      <svg id="jamsvg" viewBox="0 0 860 400" role="img" aria-label="Four phones start together then drift apart by more than a second because each decodes its own stream.">
         <text class="s-lab-s" x="10" y="22" style="fill:#F7A93B">EACH PHONE DECODES ITS OWN STREAM</text>
         <text id="jamHead" class="s-lab-s" x="850" y="22" text-anchor="end">WORST GAP: 0 ms</text>
-
-        <!-- bar guides -->
         <g stroke="var(--line)" stroke-width="1" stroke-dasharray="2 6" opacity=".9">
-          <line x1="242" y1="52" x2="242" y2="360"/>
-          <line x1="402" y1="52" x2="402" y2="360"/>
-          <line x1="562" y1="52" x2="562" y2="360"/>
-          <line x1="682" y1="52" x2="682" y2="360"/>
+          <line x1="242" y1="52" x2="242" y2="360"/><line x1="402" y1="52" x2="402" y2="360"/>
+          <line x1="562" y1="52" x2="562" y2="360"/><line x1="682" y1="52" x2="682" y2="360"/>
         </g>
-
         <defs>
           <g id="beats">
-            <rect x="0"   y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="40"  y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="80"  y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="120" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="160" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="200" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="240" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="280" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="320" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="360" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="400" y="-15" width="5" height="30" rx="1.5"/>
-            <rect x="440" y="-15" width="5" height="30" rx="1.5"/>
+            <rect x="0" y="-15" width="5" height="30" rx="1.5"/><rect x="40" y="-15" width="5" height="30" rx="1.5"/>
+            <rect x="80" y="-15" width="5" height="30" rx="1.5"/><rect x="120" y="-15" width="5" height="30" rx="1.5"/>
+            <rect x="160" y="-15" width="5" height="30" rx="1.5"/><rect x="200" y="-15" width="5" height="30" rx="1.5"/>
+            <rect x="240" y="-15" width="5" height="30" rx="1.5"/><rect x="280" y="-15" width="5" height="30" rx="1.5"/>
+            <rect x="320" y="-15" width="5" height="30" rx="1.5"/><rect x="360" y="-15" width="5" height="30" rx="1.5"/>
+            <rect x="400" y="-15" width="5" height="30" rx="1.5"/><rect x="440" y="-15" width="5" height="30" rx="1.5"/>
           </g>
         </defs>
-
-        <!-- track 1 -->
         <g transform="translate(0,90)">
-          <text class="s-name" x="10" y="-2" style="fill:#F7A93B">PHONE A</text>
-          <text class="s-lab-s" x="10" y="14">host · wired to the rig</text>
+          <text class="s-name" x="10" y="-2" style="fill:#F7A93B">THE RIG</text>
+          <text class="s-lab-s" x="10" y="14">wired to the transmitter</text>
           <g id="jamT1" transform="translate(240,0)"><use href="#beats" fill="#F7A93B"/></g>
-          <text id="jamR1" class="s-lab-s" x="850" y="4" text-anchor="end" style="fill:#F7A93B">reference</text>
+          <text class="s-lab-s" x="850" y="4" text-anchor="end" style="fill:#F7A93B">reference</text>
         </g>
-        <!-- track 2 -->
         <g transform="translate(0,168)">
-          <text class="s-name" x="10" y="-2">PHONE B</text>
-          <text class="s-lab-s" x="10" y="14">guest · Bluetooth speaker</text>
+          <text class="s-name" x="10" y="-2">PHONE B</text><text class="s-lab-s" x="10" y="14">on a Bluetooth speaker</text>
           <g id="jamT2" transform="translate(240,0)"><use href="#beats" fill="#ECE7DD"/></g>
           <text id="jamR2" class="s-lab-s" x="850" y="4" text-anchor="end">+0 ms</text>
         </g>
-        <!-- track 3 -->
         <g transform="translate(0,246)">
-          <text class="s-name" x="10" y="-2">PHONE C</text>
-          <text class="s-lab-s" x="10" y="14">guest · weak 4G</text>
+          <text class="s-name" x="10" y="-2">PHONE C</text><text class="s-lab-s" x="10" y="14">weak signal</text>
           <g id="jamT3" transform="translate(240,0)"><use href="#beats" fill="#ECE7DD"/></g>
           <text id="jamR3" class="s-lab-s" x="850" y="4" text-anchor="end">+0 ms</text>
         </g>
-        <!-- track 4 -->
         <g transform="translate(0,324)">
-          <text class="s-name" x="10" y="-2">PHONE D</text>
-          <text class="s-lab-s" x="10" y="14">guest · older handset</text>
+          <text class="s-name" x="10" y="-2">PHONE D</text><text class="s-lab-s" x="10" y="14">older handset</text>
           <g id="jamT4" transform="translate(240,0)"><use href="#beats" fill="#ECE7DD"/></g>
           <text id="jamR4" class="s-lab-s" x="850" y="4" text-anchor="end">+0 ms</text>
         </g>
-
         <text class="s-lab-s" x="10" y="386">dashed lines = where the beat should land</text>
       </svg>
-      <figcaption><b>Scroll to let the track play.</b> In a remote Jam, every participant's phone streams and decodes independently. Nothing holds them together, so each one slides by its own amount — and any phone wired to a speaker brings that slide out into the street.</figcaption>
+      <figcaption><b>Scroll to let the track play.</b> Speakers on one SKAA transmitter physically cannot drift. Extra phones can, and do.</figcaption>
     </figure>
   </div>
   <div class="scrolly__steps">
-    <div class="step" data-step="0">
-      <span class="step__k">Press play</span>
-      <p>Everyone is together. This is the bit that gets tested, and it always looks fine.</p>
-    </div>
-    <div class="step" data-step="1">
-      <span class="step__k">Thirty seconds in</span>
-      <p>Phone B is running through a Bluetooth speaker, which adds its own delay that nothing compensates for. It's now a fraction of a beat late — enough to hear as a flam on the snare.</p>
-    </div>
-    <div class="step" data-step="2">
-      <span class="step__k">Two minutes in</span>
-      <p>The weak-signal phone has been rebuffering. The old handset decodes a touch slower. They are now most of a bar apart. Users report gaps of <strong>three to seven seconds</strong> in the wild.</p>
-    </div>
-    <div class="step" data-step="3">
-      <span class="step__k">The diagnosis</span>
-      <p>This was never a connectivity problem. It's a <em>counting</em> problem: four devices were making sound, and four independent clocks will always come apart. No network fixes that — and note what it doesn't prove. Jam isn't broken. Get the count down to one and the same feature works perfectly.</p>
-    </div>
+    <div class="step" data-step="0"><span class="step__k">Press play</span><p>Everybody together. This is the bit that gets tested, and it always looks fine.</p></div>
+    <div class="step" data-step="1"><span class="step__k">Thirty seconds</span><p>The phone on a Bluetooth speaker is already a fraction of a beat late. Nothing compensates for it.</p></div>
+    <div class="step" data-step="2"><span class="step__k">Two minutes</span><p>Most of a bar apart. Riders report gaps of three to seven seconds in the wild.</p></div>
+    <div class="step" data-step="3"><span class="step__k">The fix</span><p>Not a network. Just <strong>keep the count at one</strong>: admins mute their own phones and plug into nothing.</p></div>
   </div>
 </section>
 
-<div class="pull"><p>The fix isn't a better network.<br>It's <span class="q">one device</span> making sound.</p></div>
+<div class="pull"><p>Your phone is a <span class="q">remote,</span><br>not a <span class="q">speaker.</span></p></div>
 
-<!-- ============ 6. THE NETWORK THAT WOULDN'T HELP ============ -->
+<!-- ============ 6. THE CHECKLIST ============ -->
 <section class="chapter">
   <div class="col">
-    <p class="eyebrow">The idea that doesn't work</p>
-    <h2 class="chapter__h">Putting everyone on one network</h2>
-    <p>Here is the reasonable instinct. Remote control works flawlessly at home on Wi-Fi. There's no Wi-Fi on the street. So: give everyone a private network that follows them around — a Tailscale tailnet — and you've recreated the living room.</p>
-    <p>It's a genuinely good instinct, and it's wrong for two independent reasons. Either one on its own would sink it.</p>
-    <p><strong>First: Spotify's remote control was never using your Wi-Fi.</strong> Every way of controlling someone else's playback — a Jam, or two devices sharing one account — routes through Spotify's own servers. Different phones, different carriers, opposite ends of the country: it works, and no local network is involved at any point. There's a long-running thread on Spotify's community forum from people reporting cross-network control as a <em>security hole</em>, which is about the strongest confirmation you could ask for.</p>
-    <p><strong>Second: a tailnet couldn't fake a local network anyway.</strong> Local discovery — the thing that makes a speaker appear on your home Wi-Fi — runs on multicast. Tailscale routes unicast traffic only; multicast and mDNS don't cross it, and it's a long-standing open request on their tracker. The one job you'd be installing it for is the one job it can't do.</p>
+    <p class="eyebrow">On the night</p>
+    <h2 class="chapter__h">The whole checklist</h2>
   </div>
-
-  <div class="figwrap">
-    <figure class="fig">
-      <div class="scrollx">
-      <svg viewBox="0 0 860 300" role="img" aria-label="The imagined tailnet sends commands phone to phone; in reality Spotify routes every command through its own servers, and a tailnet cannot carry the discovery traffic anyway." style="min-width:620px">
-        <defs>
-          <marker id="ah-am2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#F7A93B"/></marker>
-          <marker id="ah-mut2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8A94A9"/></marker>
-        </defs>
-        <line x1="428" y1="10" x2="428" y2="290" class="s-line" stroke-dasharray="2 6"/>
-
-        <!-- LEFT: the intuition -->
-        <text class="s-lab-s" x="20" y="24">THE INTUITION</text>
-        <text class="s-big" x="20" y="50" style="font-size:17px;fill:#8A94A9">ONE PRIVATE NETWORK</text>
-        <rect x="34" y="82" width="360" height="150" rx="10" fill="none" stroke="#8A94A9" stroke-width="1.2" stroke-dasharray="5 5" opacity=".7"/>
-        <text class="s-lab-s" x="46" y="102">TAILNET</text>
-        <g fill="none" stroke="#8A94A9" stroke-width="1.4" opacity=".8">
-          <line x1="128" y1="150" x2="188" y2="130" marker-end="url(#ah-mut2)"/>
-          <line x1="128" y1="166" x2="188" y2="186" marker-end="url(#ah-mut2)"/>
-          <line x1="238" y1="130" x2="298" y2="152" marker-end="url(#ah-mut2)"/>
-          <line x1="238" y1="186" x2="298" y2="166" marker-end="url(#ah-mut2)"/>
-        </g>
-        <g>
-          <g transform="translate(78,132)"><rect x="0" y="0" width="30" height="50" rx="4" class="s-box"/></g>
-          <g transform="translate(196,106)"><rect x="0" y="0" width="30" height="50" rx="4" class="s-box"/></g>
-          <g transform="translate(196,162)"><rect x="0" y="0" width="30" height="50" rx="4" class="s-box"/></g>
-          <g transform="translate(306,132)"><rect x="0" y="0" width="30" height="50" rx="4" class="s-box" style="stroke:#F7A93B"/><text class="s-lab-s" x="15" y="66" text-anchor="middle" style="fill:#F7A93B">DISCO</text></g>
-        </g>
-        <text class="s-lab-s" x="20" y="272">phone talks straight to phone</text>
-
-        <!-- RIGHT: reality -->
-        <text class="s-lab-s" x="458" y="24" style="fill:#F7A93B">WHAT SPOTIFY ACTUALLY DOES</text>
-        <text class="s-big" x="458" y="50" style="font-size:17px;fill:#F7A93B">STRAIGHT THROUGH THE INTERNET</text>
-        <g transform="translate(462,140)"><rect x="0" y="0" width="30" height="50" rx="4" class="s-box"/><text class="s-lab-s" x="15" y="66" text-anchor="middle">ADMIN</text></g>
-        <path d="M496 152 C 550 152, 560 96, 606 96" class="s-amber-s" stroke-width="1.6" marker-end="url(#ah-am2)"/>
-        <rect x="612" y="70" width="118" height="52" rx="3" class="s-box" style="stroke:#F7A93B"/>
-        <text class="s-lab-s" x="671" y="92" text-anchor="middle" style="fill:#F7A93B">SPOTIFY'S</text>
-        <text class="s-lab-s" x="671" y="106" text-anchor="middle" style="fill:#F7A93B">SERVERS</text>
-        <path d="M730 100 C 776 100, 786 132, 786 148" class="s-amber-s" stroke-width="1.6" marker-end="url(#ah-am2)"/>
-        <g transform="translate(772,154)"><rect x="0" y="0" width="30" height="50" rx="4" class="s-box" style="stroke:#F7A93B"/><text class="s-lab-s" x="15" y="66" text-anchor="middle" style="fill:#F7A93B">DISCO</text></g>
-        <!-- the crossed-out direct path -->
-        <line x1="496" y1="186" x2="768" y2="186" stroke="#FF4F6E" stroke-width="1.2" stroke-dasharray="4 5" opacity=".65"/>
-        <g stroke="#FF4F6E" stroke-width="2" stroke-linecap="round">
-          <line x1="624" y1="178" x2="640" y2="194"/><line x1="640" y1="178" x2="624" y2="194"/>
-        </g>
-        <text class="s-lab-s" x="632" y="216" text-anchor="middle" style="fill:#FF4F6E">a tailnet carries no multicast —</text>
-        <text class="s-lab-s" x="632" y="230" text-anchor="middle" style="fill:#FF4F6E">local discovery can't cross it</text>
-        <text class="s-lab-s" x="458" y="272" style="fill:#F7A93B">no shared network needed at any point</text>
-      </svg>
-      </div>
-      <figcaption><b>Drawing the difference.</b> The tailnet on the left is real and would work — it just isn't the path Spotify uses. Every play, pause and skip goes out to Spotify's servers and back down to the disco phone, over whatever connection each phone happens to have.</figcaption>
-    </figure>
-  </div>
-
-  <div class="col">
-    <div class="callout callout--warn">
-      <span class="tag">The verdict on Tailscale</span>
-      <p>Don't install it. It adds a second app, a second login and a second thing that can be "off" on the night — in exchange for solving a problem you don't have. Keep it in your back pocket for something else; it's a fine tool aimed at the wrong target here.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- ============ 6b. THE ACCOUNT QUESTION ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">The account question</p>
-    <h2 class="chapter__h">Nobody has to give up their Spotify</h2>
-    <p>There are exactly two ways to change what's playing on somebody else's phone, and choosing between them is the whole design decision.</p>
-    <p><strong>Spotify Connect is same-account only.</strong> The device list you see is your account's device list, and no tier or setting changes that. Two people on separate accounts, standing in the same room, cannot control each other's playback at all. The only route is everyone logging out and back in as one shared account.</p>
-    <p><strong>Spotify Jam is the cross-account route</strong> — the one actually built for this. Everyone stays on their own account. The host starts a Jam, shares a link, and guests can play, pause, skip and add to the queue.</p>
-    <p>With one catch that is very likely why the first attempt disappointed: <strong>guest controls are off by default.</strong> Until the host switches them on, guests can add to the queue and nothing else — which feels precisely like a feature that doesn't work.</p>
-  </div>
-
-  <div class="figwrap">
-    <div class="fig scrollx">
-      <table>
-        <thead><tr><th>&nbsp;</th><th>Spotify Connect</th><th>Spotify Jam</th></tr></thead>
-        <tbody>
-          <tr><td>Whose account</td><td>One shared account, everybody logs into it</td><td><b>Everyone keeps their own</b></td></tr>
-          <tr><td>Who can control playback</td><td>Anyone signed into that account</td><td>Guests — <b>once the host enables guest controls</b></td></tr>
-          <tr><td>Setup per event</td><td>None</td><td>Host starts a Jam, shares a link or QR</td></tr>
-          <tr><td>Do guests need Premium</td><td>No — they share the one account</td><td><b>Yes, every one of them</b></td></tr>
-          <tr><td>How it goes wrong</td><td>Someone presses play and steals the stream</td><td>Someone's own phone drives a speaker</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="col">
-    <h3 style="margin:0 0 1rem;font-size:1.24rem">What a Free account can actually do</h3>
-    <p>Assuming everyone is on Premium, none of this bites — but it's worth knowing exactly where the line falls, because one row of it decides the whole design.</p>
-  </div>
-
-  <div class="figwrap">
-    <figure class="fig">
-      <div class="scrollx">
-      <table>
-        <thead><tr><th>In a Jam, can you&hellip;</th><th>Free</th><th>Premium</th></tr></thead>
-        <tbody>
-          <tr><td>Start and host the Jam</td><td><span style="color:var(--reflector)">No</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
-          <tr><td>Join by link, from a distance</td><td><span style="color:var(--reflector)">No</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
-          <tr><td>Join in person, phones together</td><td><span style="color:var(--sodium)">Yes</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
-          <tr><td>Add songs to the queue</td><td><span style="color:var(--sodium)">Yes</span></td><td><span style="color:var(--sodium)">Yes</span></td></tr>
-          <tr><td>Pause, skip, control playback</td><td><span style="color:var(--muted)">Undocumented — reported as no</span></td><td><span style="color:var(--sodium)">Yes, with guest controls on</span></td></tr>
-        </tbody>
-      </table>
-      </div>
-      <figcaption><b>The first four rows are Spotify's own documentation.</b> The last one is not: Spotify never states whether a Free guest can control playback, and third-party reporting says they cannot. Don't build a plan on it.</figcaption>
-    </figure>
-  </div>
-
-  <div class="col">
-    <div class="callout callout--warn">
-      <span class="tag">On a parade, row two settles it</span>
-      <p>Every join on a moving parade is a remote join — nobody is holding their phone against the sound bike at 20 km/h. And remote joining requires Premium, full stop. So the undocumented row never even comes up: <strong>every admin needs their own Premium</strong>, and the only Free-account route is joining in person at the pub before you roll out, which then rests on exactly the row nobody can confirm.</p>
-    </div>
-    <div class="callout callout--go" style="margin-top:1.2rem">
-      <span class="tag">This one fact picks your plan</span>
-      <p>If all your admins already pay for Premium — the likely case — use a Jam and you're done. If any of them don't, a Jam quietly won't work for that person, and both fallbacks further down fix it: a shared account means only <em>one</em> Premium exists in the whole system, and the DIY web remote needs no admin accounts at all.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- ============ 7. THE ANSWER ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">The answer</p>
-    <h2 class="chapter__h">Two planes that never touch</h2>
-    <p>Here is the whole design in one idea. The parade runs on two separate systems, and almost every mistake comes from mixing them up.</p>
-    <p>The <strong>audio plane</strong> is radio. One phone, one cable, one SKAA transmitter, four speakers. No internet, no Wi-Fi, no accounts. If the playlist is downloaded, this half keeps working in a tunnel.</p>
-    <p>The <strong>control plane</strong> is the internet. Admin phones — <em>on their own accounts</em> — send instructions into a Jam, which Spotify's servers pass down to the disco phone. Tiny messages: a skip is a few hundred bytes, not a song.</p>
-    <p>The disco phone is the single point where the two meet. It is the only device on the entire parade permitted to make a sound. Everyone else holds a remote control.</p>
-  </div>
-
-  <div class="figwrap">
-    <figure class="fig">
-      <div class="scrollx">
-      <svg viewBox="0 0 900 490" role="img" aria-label="Admin phones send commands through Spotify's servers to the disco phone; the disco phone alone feeds a SKAA transmitter over USB, which drives four speakers by radio." style="min-width:660px">
-        <defs>
-          <marker id="ah-a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#F7A93B"/></marker>
-          <marker id="ah-c3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#57D9E8"/></marker>
-        </defs>
-
-        <text class="s-lab-s" x="14" y="18" style="fill:#F7A93B;letter-spacing:.16em">CONTROL PLANE — INSTRUCTIONS, OVER THE INTERNET</text>
-
-        <!-- admin phones -->
-        <g>
-          <rect x="30" y="50" width="36" height="56" rx="5" class="s-box"/><rect x="35" y="55" width="26" height="38" rx="2" fill="#070B16"/>
-          <rect x="78" y="50" width="36" height="56" rx="5" class="s-box"/><rect x="83" y="55" width="26" height="38" rx="2" fill="#070B16"/>
-          <rect x="126" y="50" width="36" height="56" rx="5" class="s-box"/><rect x="131" y="55" width="26" height="38" rx="2" fill="#070B16"/>
-        </g>
-        <text class="s-name" x="30" y="126">ADMIN PHONES</text>
-        <text class="s-lab-s" x="30" y="142">2–5 people · their own accounts</text>
-
-        <line x1="172" y1="78" x2="246" y2="78" class="s-amber-s" stroke-width="1.6" marker-end="url(#ah-a3)"/>
-        <text class="s-lab-s" x="209" y="68" text-anchor="middle" style="fill:#F7A93B">commands</text>
-
-        <rect x="254" y="48" width="150" height="60" rx="3" class="s-box" style="stroke:#F7A93B"/>
-        <text class="s-name" x="329" y="74" text-anchor="middle" style="fill:#F7A93B">SPOTIFY'S SERVERS</text>
-        <text class="s-lab-s" x="329" y="92" text-anchor="middle">ONE JAM · any network</text>
-
-        <path d="M404 78 C 462 78, 470 112, 470 146" class="s-amber-s" stroke-width="1.6" marker-end="url(#ah-a3)"/>
-        <text class="s-lab-s" x="486" y="112" style="fill:#F7A93B">play · pause · skip · volume · queue</text>
-
-        <!-- the divider, broken around the disco phone -->
-        <line x1="10" y1="210" x2="408" y2="210" stroke="#233150" stroke-width="1" stroke-dasharray="3 5"/>
-        <line x1="532" y1="210" x2="890" y2="210" stroke="#233150" stroke-width="1" stroke-dasharray="3 5"/>
-
-        <!-- disco phone straddling both planes -->
-        <rect x="412" y="150" width="116" height="120" rx="6" fill="#131C2E" stroke="#F7A93B" stroke-width="1.8"/>
-        <text class="s-name" x="470" y="180" text-anchor="middle" style="fill:#F7A93B">THE</text>
-        <text class="s-name" x="470" y="196" text-anchor="middle" style="fill:#F7A93B">DISCO PHONE</text>
-        <line x1="428" y1="210" x2="512" y2="210" stroke="#233150" stroke-width="1"/>
-        <text class="s-lab-s" x="470" y="232" text-anchor="middle">the only device</text>
-        <text class="s-lab-s" x="470" y="246" text-anchor="middle">that makes a sound</text>
-        <text class="s-lab-s" x="470" y="260" text-anchor="middle">on the whole parade</text>
-
-        <!-- audio plane annotation -->
-        <text class="s-lab-s" x="14" y="286" style="fill:#57D9E8;letter-spacing:.16em">AUDIO PLANE — SOUND, OVER 2.4 GHz RADIO</text>
-        <text class="s-lab" x="30" y="330" style="fill:#ECE7DD">Sound never touches the internet.</text>
-        <text class="s-lab-s" x="30" y="352">Download the playlist to the disco phone and</text>
-        <text class="s-lab-s" x="30" y="368">this whole half keeps running with no signal</text>
-        <text class="s-lab-s" x="30" y="384">at all — through tunnels, under bridges,</text>
-        <text class="s-lab-s" x="30" y="400">in the middle of a crowd.</text>
-
-        <!-- audio chain -->
-        <line x1="528" y1="252" x2="596" y2="252" class="s-cyan-s" stroke-width="1.6" marker-end="url(#ah-c3)"/>
-        <text class="s-lab-s" x="562" y="242" text-anchor="middle" style="fill:#57D9E8">USB</text>
-        <rect x="602" y="224" width="92" height="56" rx="3" class="s-box" style="stroke:#57D9E8"/>
-        <text class="s-name" x="648" y="248" text-anchor="middle" style="fill:#57D9E8">SKAA</text>
-        <text class="s-lab-s" x="648" y="264" text-anchor="middle" style="fill:#57D9E8">TRANSMITTER</text>
-        <g class="s-cyan-s" stroke-width="1.5" opacity=".9">
-          <path d="M694 244 C 740 244, 750 202, 796 202" marker-end="url(#ah-c3)"/>
-          <path d="M694 250 C 740 250, 750 262, 796 262" marker-end="url(#ah-c3)"/>
-          <path d="M694 256 C 740 256, 750 322, 796 322" marker-end="url(#ah-c3)"/>
-          <path d="M694 262 C 740 262, 750 382, 796 382" marker-end="url(#ah-c3)"/>
-        </g>
-        <g>
-          <g transform="translate(802,182)"><rect x="0" y="0" width="40" height="40" rx="3" class="s-box"/><circle cx="20" cy="20" r="9" fill="none" stroke="#57D9E8" stroke-width="1.2"/></g>
-          <g transform="translate(802,242)"><rect x="0" y="0" width="40" height="40" rx="3" class="s-box"/><circle cx="20" cy="20" r="9" fill="none" stroke="#57D9E8" stroke-width="1.2"/></g>
-          <g transform="translate(802,302)"><rect x="0" y="0" width="40" height="40" rx="3" class="s-box"/><circle cx="20" cy="20" r="9" fill="none" stroke="#57D9E8" stroke-width="1.2"/></g>
-          <g transform="translate(802,362)"><rect x="0" y="0" width="40" height="40" rx="3" class="s-box"/><circle cx="20" cy="20" r="9" fill="none" stroke="#57D9E8" stroke-width="1.2"/></g>
-        </g>
-        <text class="s-lab-s" x="822" y="424" text-anchor="middle" style="fill:#57D9E8">4 SPEAKERS</text>
-        <text class="s-lab-s" x="822" y="440" text-anchor="middle">±40 µs apart</text>
-        <text class="s-lab-s" x="822" y="456" text-anchor="middle">36 ms behind</text>
-        <text class="s-lab-s" x="822" y="472" text-anchor="middle">the phone</text>
-      </svg>
-      </div>
-      <figcaption><b>The whole rig.</b> Everything above the dashed line is instructions travelling over the mobile network. Everything below it is sound travelling over radio. The disco phone is the hinge — and the reason the parade never goes out of sync is that nothing else is allowed to play.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- ============ 8. SETUP ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">Setting it up</p>
-    <h2 class="chapter__h">One message in the group chat</h2>
-    <p>The disco phone gets prepared at home. The admins do nothing but tap a link — from the pub, from the road, from anywhere with a bar of signal.</p>
-  </div>
-
   <div class="figwrap">
     <div class="grid grid--2">
       <div class="cell">
-        <span class="tag">Before you leave the house</span>
-        <h3>The disco phone</h3>
-        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">The one on the sound bike, cabled to the transmitter. It hosts the Jam.</p>
+        <span class="tag">Before you leave</span>
+        <h3>The sound bike</h3>
         <ol class="steps">
-          <li>Whoever owns this phone needs <strong>Premium</strong> — their own everyday account is fine. Nobody else changes anything.</li>
-          <li><strong>Download the playlist for offline.</strong> The most valuable line on this page: a coverage blackspot then cannot stop the music.</li>
-          <li>Plug into the SKAA transmitter over USB. Phone volume around 80% and leave it — do the real volume on the transmitter.</li>
-          <li>Do Not Disturb on. A phone call will duck your music in front of a hundred people.</li>
-          <li>Mobile data on. Battery pack attached.</li>
-          <li>Start the playlist, then start the Jam.</li>
-          <li><strong>Jam details → Guest settings → turn on guest controls.</strong> Miss this and your admins can queue tracks but never skip one.</li>
-          <li>Paste the Jam link into the group chat. One message, and anyone who taps it is in.</li>
+          <li>Phone wired straight into the SKAA transmitter. Volume ~80%, real volume on the transmitter.</li>
+          <li><strong>Download the playlist offline</strong> — a dead spot then can't stop the music.</li>
+          <li>Aerial up on a mast, above head height.</li>
+          <li>Do Not Disturb on. Mobile data on. Battery pack.</li>
+          <li>Start the playlist, start the Jam, then <strong>Jam details → Guest settings → guest controls ON</strong>.</li>
+          <li>Paste the Jam link into the group chat.</li>
         </ol>
       </div>
       <div class="cell">
-        <span class="tag">At the meeting point, once</span>
-        <h3>The admin phones</h3>
-        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">Two to five people, each on their own Premium. Nothing to install, nothing to log out of.</p>
+        <span class="tag">Two to five people</span>
+        <h3>The admins</h3>
         <ol class="steps">
-          <li><strong>Stay on your own account.</strong> Nothing about your Spotify changes, tonight or afterwards.</li>
-          <li>Tap the Jam link in the group chat. That is the entire join — it runs over mobile data, from anywhere, and no Bluetooth or standing-next-to-each-other is involved at any point.</li>
-          <li><strong>Turn your own volume to zero.</strong> Your phone streams along silently — that's normal, and nobody hears it.</li>
-          <li>Never plug your phone into a speaker, or pair it with one. That is the single thing that breaks the night.</li>
-          <li>Skip, pause and queue from your own Spotify app, from anywhere in the line.</li>
+          <li>Stay on your own Spotify. You need Premium.</li>
+          <li>Tap the Jam link in the group chat — works over mobile data, from anywhere in the line.</li>
+          <li><strong>Your own volume to zero.</strong> Plug into nothing, pair with nothing.</li>
+          <li>Skip, pause and queue from your own app.</li>
         </ol>
       </div>
     </div>
   </div>
-
-  <div class="col">
-    <div class="callout callout--warn">
-      <span class="tag">The host has to stay put</span>
-      <p>If the host leaves the Jam or closes Spotify, <strong>the Jam ends for everyone</strong>. The music keeps playing on the disco phone, but every remote goes dead until somebody restarts the Jam and reshares the link. Leave the disco phone's Spotify open and untouched.</p>
-    </div>
-  </div>
 </section>
 
-<!-- ============ 9. THE GOLDEN RULE ============ -->
+<!-- ============ 7. IF IT BREAKS ============ -->
 <section class="chapter" style="padding-top:0">
   <div class="col">
-    <p class="eyebrow">The golden rule</p>
-    <h2 class="chapter__h">Make no noise</h2>
-    <p>In a Jam every phone in the session streams the same track — that's how it keeps everyone's queue and buttons in step. Yours included. As long as your phone is silent and plugged into nothing, that is completely invisible.</p>
-    <p>The second a phone starts driving a speaker, there are two sound systems on two clocks, and you are back to the night everybody remembers. One picture to teach:</p>
-  </div>
-
-  <div class="figwrap" style="max-width:38rem">
-    <div class="grid" style="gap:1rem;background:none;border:none">
-      <div class="cell" style="border:1px solid rgba(29,185,84,.3);border-radius:3px">
-        <div class="bar"><span class="bar__dot"></span><span class="bar__t"><b>SILENT · PLUGGED INTO NOTHING</b>Volume at zero, in the Jam</span></div>
-        <p style="margin:1rem 0 0;font-size:.92rem"><strong>You are a remote control.</strong> Skip, pause and queue all land on the rig. Your own phone makes no sound and nobody knows it's streaming.</p>
-      </div>
-      <div class="cell" style="border:1px solid rgba(255,79,110,.3);border-radius:3px">
-        <div class="bar bar--bad"><span class="bar__dot"></span><span class="bar__t"><b>CONNECTED TO A SPEAKER</b>Your phone is making noise</span></div>
-        <p style="margin:1rem 0 0;font-size:.92rem"><strong>You are now a second sound system</strong> — on your own clock, drifting further from the rig every second. This is exactly what went wrong last time. Disconnect it.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="pull"><p>Your phone is a <span class="q">remote,</span><br>not a <span class="q">speaker.</span></p></div>
-</section>
-
-<!-- ============ 10. WHEN IT BREAKS ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">When it breaks</p>
-    <h2 class="chapter__h">Everything that goes wrong, and the ten-second fix</h2>
-    <p>None of these are disasters. Print this bit and tape it inside the bar bag.</p>
+    <p class="eyebrow">If it breaks</p>
+    <h2 class="chapter__h">Tape this inside the bar bag</h2>
   </div>
   <div class="figwrap">
     <div class="fig scrollx">
       <table>
-        <thead><tr><th>What happens</th><th>What you'll see</th><th>The fix</th></tr></thead>
+        <thead><tr><th>Problem</th><th>Fix</th></tr></thead>
         <tbody>
-          <tr>
-            <td>Admins can queue but not skip</td>
-            <td>Adding songs works, skip does nothing</td>
-            <td>Guest controls are off. On the disco phone: <b>Jam details → Guest settings → allow guests to control playback</b>.</td>
-          </tr>
-          <tr>
-            <td>Every remote dies at once</td>
-            <td>Music still playing, nobody can touch it</td>
-            <td>The host left the Jam or closed Spotify. <b>Restart the Jam</b> on the disco phone and reshare the link.</td>
-          </tr>
-          <tr>
-            <td>An echo, or the beat doubling</td>
-            <td>Two sources audible, drifting apart</td>
-            <td>A second phone is driving a speaker. <b>Find it and disconnect it</b> — SKAA receivers on one transmitter physically cannot drift.</td>
-          </tr>
-          <tr>
-            <td>One admin can queue but never skip</td>
-            <td>Their added songs appear, their skips don't</td>
-            <td>Either guest controls are off, or <b>that admin is on a Free account</b>. Free guests can add to the queue; controlling playback is undocumented and reported not to work. That person needs Premium.</td>
-          </tr>
-          <tr>
-            <td>Someone wants in mid-ride</td>
-            <td>They have no link</td>
-            <td>Reshare the invite in the group chat — it works over mobile data from anywhere in the line. <b>They'll need their own Premium.</b></td>
-          </tr>
-          <tr>
-            <td>Volume buttons do nothing</td>
-            <td>Skip works, volume doesn't</td>
-            <td>Shared volume doesn't apply to a wired or Bluetooth output. <b>Do volume at the transmitter</b> — where it belongs anyway.</td>
-          </tr>
-          <tr>
-            <td>An admin has no signal</td>
-            <td>Their taps do nothing</td>
-            <td>Nothing to do — <b>the music keeps playing</b>. Another admin covers until the bars come back.</td>
-          </tr>
-          <tr>
-            <td>The disco phone loses signal</td>
-            <td>Music fine, remotes unresponsive</td>
-            <td>This is why you downloaded the playlist. <b>Playback is safe</b>; control returns with the signal.</td>
-          </tr>
-          <tr>
-            <td>A speaker cuts out</td>
-            <td>One speaker only, others fine</td>
-            <td>Range or obstruction. Get it back within <b>≈45 m</b> of the transmitter — bodies count as obstruction.</td>
-          </tr>
+          <tr><td>Admins can add songs but not skip</td><td>Guest controls are off, or that person is on Free. <b>Jam details → Guest settings</b>.</td></tr>
+          <tr><td>Every remote dies at once</td><td>The host left the Jam or closed Spotify. <b>Restart it and reshare the link.</b></td></tr>
+          <tr><td>An echo, or the beat doubling</td><td>A second phone is driving a speaker. <b>Find it and disconnect it.</b></td></tr>
+          <tr><td>A speaker drops out</td><td>Out of range or blocked by bodies. Close the gap, <b>get the aerial higher</b>.</td></tr>
+          <tr><td>An admin has no signal</td><td>Nothing to do — <b>the music keeps playing</b>. Someone else covers.</td></tr>
+          <tr><td>The sound bike loses signal</td><td>This is why you downloaded the playlist. <b>Playback is safe</b>; control returns with the bars.</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<hr class="hr">
-
-<!-- ============ 11. SCALE ============ -->
-<section class="chapter" id="scale">
-  <div class="col">
-    <p class="eyebrow">How far it stretches</p>
-    <h2 class="chapter__h">Put the sound bike in the middle</h2>
-    <p>This is the constraint most likely to bite on a big night, and it's about geometry rather than software.</p>
-    <p>SKAA reaches about 45 metres. A hundred cyclists riding two abreast at a sensible spacing is somewhere around 150–200 metres of road. So <strong>the transmitter cannot cover the whole parade from the front</strong> — riding at the head, it serves the first quarter and abandons everyone behind.</p>
-    <p>Move the sound bike to the middle and the same 45 metres works in both directions: roughly 90 metres of covered parade for free, just by changing where one bike rides.</p>
-  </div>
-
-  <div class="figwrap">
-    <figure class="fig">
-      <div class="scrollx">
-      <svg viewBox="0 0 860 270" role="img" aria-label="A transmitter at the front of the parade covers only the first 45 metres; the same transmitter in the middle covers 90 metres." style="min-width:600px">
-        <!-- A: front -->
-        <text class="s-lab-s" x="20" y="24" style="fill:#FF4F6E">SOUND BIKE AT THE FRONT — 45 m OF 200 COVERED</text>
-        <rect x="20" y="46" width="184" height="44" fill="#F7A93B" opacity=".13"/>
-        <line x1="20" y1="68" x2="840" y2="68" class="s-line"/>
-        <g id="rowA">
-          <circle cx="44" cy="68" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="71" cy="68" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="98" cy="68" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="125" cy="68" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="152" cy="68" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="179" cy="68" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="206" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="233" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="260" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="287" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="314" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="341" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="368" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="395" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="422" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="449" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="476" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="503" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="530" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="557" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="584" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="611" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="638" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="665" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="692" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="719" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="746" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="773" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="800" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="827" cy="68" r="3.5" fill="#4A5570" opacity="1"/>
-        </g>
-        <circle cx="24" cy="68" r="7" fill="#F7A93B"/>
-        <line x1="204" y1="46" x2="204" y2="90" class="s-amber-s" stroke-width="1" stroke-dasharray="3 4"/>
-        <text class="s-lab-s" x="212" y="52" style="fill:#8A94A9">everyone past here hears nothing</text>
-
-        <!-- B: middle -->
-        <text class="s-lab-s" x="20" y="150" style="fill:#F7A93B">SOUND BIKE IN THE MIDDLE — 90 m COVERED</text>
-        <rect x="246" y="172" width="368" height="44" fill="#F7A93B" opacity=".16"/>
-        <line x1="20" y1="194" x2="840" y2="194" class="s-line"/>
-        <g id="rowB">
-          <circle cx="44" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="71" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="98" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="125" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="152" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="179" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="206" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="233" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="260" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="287" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="314" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="341" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="368" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="395" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="422" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="449" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="476" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="503" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="530" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="557" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="584" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="611" cy="194" r="3.5" fill="#F7A93B" opacity=".9"/>
-          <circle cx="638" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="665" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="692" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="719" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="746" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="773" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="800" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-          <circle cx="827" cy="194" r="3.5" fill="#4A5570" opacity="1"/>
-        </g>
-        <circle cx="430" cy="194" r="7" fill="#F7A93B"/>
-        <line x1="246" y1="172" x2="246" y2="216" class="s-amber-s" stroke-width="1" stroke-dasharray="3 4"/>
-        <line x1="614" y1="172" x2="614" y2="216" class="s-amber-s" stroke-width="1" stroke-dasharray="3 4"/>
-        <text class="s-lab-s" x="430" y="166" text-anchor="middle" style="fill:#F7A93B">45 m each way</text>
-
-        <!-- ruler -->
-        <g transform="translate(0,238)">
-          <line x1="20" y1="0" x2="840" y2="0" class="s-line"/>
-          <g class="s-lab-s" text-anchor="middle">
-            <line x1="20" y1="0" x2="20" y2="6" class="s-line"/><text x="20" y="20">0 m</text>
-            <line x1="225" y1="0" x2="225" y2="6" class="s-line"/><text x="225" y="20">50</text>
-            <line x1="430" y1="0" x2="430" y2="6" class="s-line"/><text x="430" y="20">100</text>
-            <line x1="635" y1="0" x2="635" y2="6" class="s-line"/><text x="635" y="20">150</text>
-            <line x1="840" y1="0" x2="840" y2="6" class="s-line"/><text x="840" y="20">200 m</text>
-          </g>
-        </g>
-      </svg>
-      </div>
-      <figcaption><b>The same equipment, moved.</b> Amber dots are riders inside the transmitter's range; grey dots hear nothing. The large amber circle is the sound bike. Nothing changes but its position in the line.</figcaption>
-    </figure>
-  </div>
-
-  <div class="col">
-    <p>If you want more than four speakers, you can add transmitters — up to five SKAA cells can run alongside each other — but every transmitter has to be fed the same audio from the same phone, through a splitter, on the same bike. That gets you up to twenty speakers; it does <em>not</em> get you extra distance.</p>
-    <p>What you can't do is put a second phone on a second sound bike further down the line. Two phones means two clocks, and you are back to the Jam problem — this time with real speakers on the street.</p>
-    <div class="callout callout--go">
-      <span class="tag">The rule of thumb</span>
-      <p>One phone. One position in the line, in the middle. Speakers spread within 45 metres of it. If the parade is longer than that, the tail hears the crowd instead — which is a formation decision, not a technology one.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="hr">
-
-<!-- ============ 12. PLAN B ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">If Jam turns out flaky</p>
-    <h2 class="chapter__h">The bulletproof fallback</h2>
-    <p>Jam is the right first choice because nobody touches their account. But it has moving parts: a link to reshare each event, a guest-controls toggle that can end up off, and a host who has to stay in the session.</p>
-    <p>The alternative removes every one of those, at a single cost. Make one shared <strong>Bike Disco</strong> Premium account, put the disco phone on it, and have the admins sign into it too. Now everyone is on one account, so <strong>Spotify Connect</strong> applies: open the app, tap the Connect icon, choose <span class="mono">DISCO PHONE</span>, and you're a remote. No invite links, no per-event setup, nothing to toggle.</p>
-    <p>It also deletes the per-admin Premium bill. The shared account is the only subscription anywhere in the system, so it stops mattering what plan anybody's personal account is on.</p>
-    <p>The cost is real. Signing into the Bike Disco account means signing <em>out</em> of your own for the night. And it brings one new failure mode: a single account plays on one device at a time, so an admin who presses play <em>without</em> selecting DISCO PHONE first drags the music into their pocket and the street goes quiet. Recovery takes five seconds — select DISCO PHONE, press play — but it has to be taught.</p>
-    <p>Three settings make it work, and the first is the one everybody misses:</p>
-    <ul class="ticks">
-      <li>Settings → <strong>Apps and devices</strong> → turn <strong>off</strong> "Show local devices only". Left on, the disco phone stays invisible precisely because it isn't on your Wi-Fi.</li>
-      <li>iPhone: iOS Settings → Spotify → <strong>Local Network</strong> → on.</li>
-      <li>Name the disco phone <span class="mono">DISCO PHONE</span>, in capitals — not "iPhone (3)". Everyone has to spot it in a hurry.</li>
-    </ul>
-    <p style="margin-top:1.15em">Connect also drops idle devices after roughly ten minutes; wake the disco phone and it reappears in the list.</p>
-    <div class="callout">
-      <span class="tag">Worth five minutes of testing</span>
-      <p>You may be able to have both. Leave the Spotify <em>app</em> on your own account, and open <span class="mono">open.spotify.com</span> in your phone's browser signed into the Bike Disco account, using the web player purely as a remote. If the Connect picker shows DISCO PHONE there, nobody logs out of anything. Mobile browsers are inconsistent about this — test it before you rely on it.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 12b. PLAN C ============ -->
+<!-- ============ 8. IF JAM DOESN'T SUIT ============ -->
 <section class="chapter" style="padding-top:0">
   <div class="col">
-    <p class="eyebrow">If somebody fancies building something</p>
-    <h2 class="chapter__h">A web page with three enormous buttons</h2>
-    <p>There's a third route that beats both of the above on sheer ease of use, at the cost of an afternoon from whoever is technical.</p>
-    <p>Spotify's Web API can drive playback on any device the account holder has authorised. Authorise it once against the disco phone's account, keep the token on a small server, and put three huge buttons on a web page: <span class="mono">SKIP</span>, <span class="mono">PAUSE</span>, <span class="mono">QUIETER</span>.</p>
-    <p>The admins then need no Spotify account, no Premium, no app, no login and no invite link. They bookmark one URL and hit a button wearing gloves, in the dark, at speed. Nothing else on this page comes close for that.</p>
-    <p>The catches: the controlled account needs Premium; the token can't live in a public web page, so this needs a small backend rather than plain static hosting; and anybody holding the link can press the buttons, so keep it obscure and be ready to rotate it.</p>
+    <p class="eyebrow">Two fallbacks</p>
+    <h2 class="chapter__h">If a Jam doesn't suit</h2>
   </div>
-</section>
-
-<!-- ============ 13. VERDICT ============ -->
-<section class="chapter">
-  <div class="col">
-    <p class="eyebrow">The decision</p>
-    <div class="verdict">
-      <div class="verdict__v">Use a Jam.<br>Skip the<br>tailnet.</div>
-      <div>
-        <p style="margin:0">A Jam does exactly what you wanted Tailscale to do — across separate accounts, over the mobile network, with no shared Wi-Fi anywhere in the picture. Switch on guest controls, keep one device making sound, and there is nothing left for a tailnet to solve.</p>
+  <div class="figwrap">
+    <div class="grid grid--2">
+      <div class="cell">
+        <h3>One shared account</h3>
+        <span class="tag" style="margin-top:.4rem">Bulletproof, but you log out of your own</span>
+        <p>Make one <strong>Bike Disco</strong> Premium account, put every phone on it, and use Spotify Connect. No links, no toggles, nothing to set up each time — and only one subscription in the whole system, so it doesn't matter what plan anyone is on. The cost: you're signed out of your own Spotify for the night, and whoever presses play without picking <span class="mono">DISCO PHONE</span> first steals the music.</p>
+      </div>
+      <div class="cell">
+        <h3>A page with three big buttons</h3>
+        <span class="tag" style="margin-top:.4rem">Easiest of all, needs an afternoon's work</span>
+        <p>Spotify's API can drive the sound bike's playback directly. Put <span class="mono">SKIP</span>, <span class="mono">PAUSE</span> and <span class="mono">QUIETER</span> on a web page and the admins need no Spotify account, no Premium, no app and no link — just a bookmark they can hit wearing gloves. Needs a small server to hold the token, so it can't be this site alone.</p>
       </div>
     </div>
-    <h3 style="margin:2.6rem 0 1rem;font-size:1.24rem">What to actually do</h3>
-    <ul class="ticks">
-      <li>One phone, cabled to the SKAA transmitter, Premium, playlist downloaded. It hosts the Jam.</li>
-      <li><strong>Turn on guest controls.</strong> This is the step that decides whether the whole thing works.</li>
-      <li>Admins tap the Jam link in the group chat — over mobile data, from anywhere in the line. <strong>Each one needs their own Premium.</strong></li>
-      <li>Every admin sets their own volume to zero and plugs into nothing.</li>
-      <li>Ride the sound bike in the <strong>middle</strong> of the line, not the front.</li>
-      <li>Teach one rule: <strong>your phone is a remote, not a speaker.</strong></li>
-    </ul>
-    <h3 style="margin:2.4rem 0 1rem;font-size:1.24rem">Worth a dry run</h3>
-    <ul class="ticks no">
-      <li>Three phones, three different networks, Wi-Fi off. Host a Jam, enable guest controls, and confirm a guest can genuinely skip a track. Ten minutes in a park settles the entire question.</li>
-      <li>Check the music keeps playing on the host phone when a guest's phone loses signal or leaves.</li>
-      <li>Confirm four speakers is enough coverage for the size of parade you're planning.</li>
-    </ul>
   </div>
 </section>
 
 <footer>
   <div class="col col--wide">
-    <h4>Where this comes from</h4>
+    <h4>Sources</h4>
     <ul>
-      <li><a href="https://support.spotify.com/us/article/spotify-connect/">Spotify — Spotify Connect</a> · device visibility, the "Show local devices only" setting, the ~10-minute idle timeout</li>
-      <li><a href="https://support.spotify.com/us/article/jam/">Spotify — Jam</a> · guest controls, Premium requirements, joining in person vs remotely, the host ending the Jam</li>
-      <li><a href="https://community.spotify.com/t5/Your-Library/Jam-session-playback-control-not-working/td-p/7178498">Spotify Community — Jam playback control not working</a> · guest controls are off by default and live under Jam details → Guest settings</li>
-      <li><a href="https://developer.spotify.com/documentation/web-api/reference/start-a-users-playback">Spotify Web API — player reference</a> · the DIY remote: <span class="mono">user-modify-playback-state</span> scope, Premium required on the controlled account</li>
-      <li><a href="https://community.spotify.com/t5/Other-Podcasts-Partners-etc/Devices-can-be-controlled-from-any-network/td-p/4428681">Spotify Community — devices can be controlled from any network</a> · cross-network Connect control, reported as a security concern</li>
-      <li><a href="https://community.spotify.com/t5/Live-Ideas/Add-a-Manual-Audio-Delay-Sync-Offset-Slider-for-Spotify-Jam/idi-p/7353774">Spotify Community — Jam sync offset request</a> · first-hand reports of 3–7 second drift between participants</li>
-      <li><a href="https://skaa.com/pages/transmitters">SKAA — transmitters</a> and <a href="https://www.residentialsystems.com/features/going-forward/skaas-the-limit">Residential Systems — SKAA's the Limit</a> · 150 ft range, four receivers per transmitter, five cells, ±40 µs</li>
-      <li><a href="https://cerwinvega.com/blogs/news/advantages-of-using-skaa-rather-than-bluetooth">Cerwin Vega — SKAA vs Bluetooth</a> · 36 ms fixed against Bluetooth's 120–200 ms variable</li>
-      <li><a href="https://github.com/tailscale/tailscale/issues/11134">Tailscale issue #11134</a> and <a href="https://github.com/tailscale/tailscale/issues/1013">#1013</a> · multicast and mDNS are not carried across a tailnet</li>
+      <li><a href="https://support.spotify.com/us/article/jam/">Spotify — Jam</a> · guest controls, Premium rules, the host ending the Jam</li>
+      <li><a href="https://support.spotify.com/us/article/spotify-connect/">Spotify — Connect</a> · same-account only, device visibility</li>
+      <li><a href="https://community.spotify.com/t5/Live-Ideas/Add-a-Manual-Audio-Delay-Sync-Offset-Slider-for-Spotify-Jam/idi-p/7353774">Spotify Community</a> · first-hand reports of 3–7 second Jam drift</li>
+      <li><a href="https://soundboks.com/blogs/in-tune/what-is-skaa-technology-and-how-does-it-make-your-soundboks-even-better">SOUNDBOKS on SKAA</a> and <a href="https://skaa.com/pages/transmitters">SKAA</a> · built-in SKAA, four receivers per transmitter, receiver mode, 36 ms fixed, ±40 µs</li>
+      <li><a href="https://github.com/tailscale/tailscale/issues/11134">Tailscale #11134</a> · multicast and mDNS don't cross a tailnet</li>
     </ul>
-    <p style="max-width:38rem">Written for the Dublin bike disco crew. Figures are drawn to the manufacturers' published numbers; real-world range depends on how many bodies are between the transmitter and the speaker, and on a night out there are a lot of bodies.</p>
+    <p style="max-width:38rem">Written for the Dublin bike disco crew. Range figures are the manufacturers' own; what you get on the night depends on how many bodies are in the way, which is the entire point of raising the aerials.</p>
   </div>
 </footer>
 
@@ -1158,76 +657,26 @@ footer a{color:#B9C0CE}
 (function () {
   "use strict";
   var railFill = document.querySelector("#rail i");
-  var regs = [];
+  var DRIFT = [0, 140, 520, 1180], PX_PER_MS = 0.08;
+  var jamEl = document.querySelector('[data-scrolly="jam"]');
+  var steps = jamEl ? jamEl.querySelectorAll(".step") : [];
+  var jamHead = document.getElementById("jamHead");
+  var last = -1;
 
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
-  function register(sectionEl, onProgress) {
-    if (!sectionEl) return;
-    var steps = sectionEl.querySelectorAll(".step");
-    regs.push({ el: sectionEl, steps: steps, fn: onProgress, last: -1 });
-  }
-
-  /* ---- Scene 1: the Bluetooth wall ---- */
-  var btSpk = document.getElementById("btSpk"),
-      btLink = document.getElementById("btLink"),
-      btLinkLab = document.getElementById("btLinkLab"),
-      btDist = document.getElementById("btDist"),
-      btState = document.getElementById("btState"),
-      btBadge = document.getElementById("btBadge"),
-      btBars = document.getElementById("btBars");
-  var btBadgeText = btBadge ? btBadge.querySelector("text") : null;
-
-  register(document.querySelector('[data-scrolly="bt"]'), function (p) {
-    var metres = p * 20;
-    var x = 110 + p * 680;
-    btSpk.setAttribute("transform", "translate(" + (x - 23).toFixed(1) + ",110)");
-    btLink.setAttribute("x2", (x - 32).toFixed(1));
-    btDist.textContent = metres.toFixed(1) + " m";
-
-    var lit = Math.round(clamp01(1 - metres / 14) * 5);
-    var bars = btBars.children;
-    for (var i = 0; i < bars.length; i++) {
-      bars[i].style.fill = i < lit ? (metres < 8 ? "#57D9E8" : "#F7A93B") : "#233150";
-    }
-
-    if (metres < 8) {
-      btLink.style.stroke = "#57D9E8";
-      btLink.setAttribute("stroke-dasharray", "none");
-      btLink.setAttribute("marker-end", "url(#ah-cy)");
-      btLinkLab.style.fill = "#57D9E8";
-      btState.textContent = "LINK STABLE";
-      btState.style.fill = "#57D9E8";
-      btBadge.setAttribute("opacity", "0");
-    } else {
-      btLink.style.stroke = "#FF4F6E";
-      btLink.setAttribute("stroke-dasharray", "8 7");
-      btLink.setAttribute("marker-end", "none");
-      btLinkLab.style.fill = "#FF4F6E";
-      btState.textContent = metres < 14 ? "STUTTERING" : "DROPPED";
-      btState.style.fill = "#FF4F6E";
-      btBadge.setAttribute("opacity", "1");
-      if (btBadgeText) btBadgeText.textContent = metres < 14 ? "AUDIO DROPPING OUT" : "AUDIO GONE";
-    }
-  });
-
-  /* ---- Scene 2: Jam drift ---- */
-  var DRIFT = [0, 140, 520, 1180];   /* ms behind the host, at full scroll */
-  var PX_PER_MS = 0.08;              /* 40 px per 500 ms beat */
-  var jamHead = document.getElementById("jamHead");
-
-  register(document.querySelector('[data-scrolly="jam"]'), function (p) {
+  function paint(p) {
     var worst = 0;
     for (var i = 0; i < 4; i++) {
       var ms = DRIFT[i] * p;
       if (ms > worst) worst = ms;
-      var track = document.getElementById("jamT" + (i + 1));
-      if (track) track.setAttribute("transform", "translate(" + (240 + ms * PX_PER_MS).toFixed(1) + ",0)");
+      var t = document.getElementById("jamT" + (i + 1));
+      if (t) t.setAttribute("transform", "translate(" + (240 + ms * PX_PER_MS).toFixed(1) + ",0)");
       if (i > 0) {
-        var out = document.getElementById("jamR" + (i + 1));
-        if (out) {
-          out.textContent = "+" + Math.round(ms) + " ms";
-          out.style.fill = ms > 300 ? "#FF4F6E" : ms > 60 ? "#F7A93B" : "#8A94A9";
+        var o = document.getElementById("jamR" + (i + 1));
+        if (o) {
+          o.textContent = "+" + Math.round(ms) + " ms";
+          o.style.fill = ms > 300 ? "#FF4F6E" : ms > 60 ? "#F7A93B" : "#8A94A9";
         }
       }
     }
@@ -1235,41 +684,29 @@ footer a{color:#B9C0CE}
       jamHead.textContent = "WORST GAP: " + Math.round(worst) + " ms";
       jamHead.style.fill = worst > 300 ? "#FF4F6E" : worst > 60 ? "#F7A93B" : "#8A94A9";
     }
-  });
+  }
 
-  /* ---- drive everything from one scroll handler ---- */
   var queued = false;
   function update() {
     queued = false;
     var vh = window.innerHeight;
-
-    for (var i = 0; i < regs.length; i++) {
-      var r = regs[i];
-      var box = r.el.getBoundingClientRect();
+    if (jamEl) {
+      var box = jamEl.getBoundingClientRect();
       var span = box.height - vh;
       var p = span > 0 ? clamp01(-box.top / span) : (box.top < vh / 2 ? 1 : 0);
-      r.fn(p);
-
-      if (r.steps.length) {
-        var idx = Math.min(r.steps.length - 1, Math.floor(p * r.steps.length));
-        if (idx !== r.last) {
-          for (var s = 0; s < r.steps.length; s++) {
-            r.steps[s].classList.toggle("on", s === idx);
-          }
-          r.last = idx;
+      paint(p);
+      if (steps.length) {
+        var idx = Math.min(steps.length - 1, Math.floor(p * steps.length));
+        if (idx !== last) {
+          for (var s = 0; s < steps.length; s++) steps[s].classList.toggle("on", s === idx);
+          last = idx;
         }
       }
     }
-
-    var doc = document.documentElement;
-    var total = doc.scrollHeight - vh;
+    var doc = document.documentElement, total = doc.scrollHeight - vh;
     railFill.style.width = (total > 0 ? clamp01(window.scrollY / total) * 100 : 0) + "%";
   }
-
-  function onScroll() {
-    if (!queued) { queued = true; requestAnimationFrame(update); }
-  }
-
+  function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
   update();
