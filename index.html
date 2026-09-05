@@ -231,7 +231,7 @@ footer a{color:#B9C0CE}
     <div class="col col--wide">
       <p class="dateline"><span>Dublin</span><span><b>A technical brief for the bike disco crew</b></span><span>9 min read</span></p>
       <h1>One playlist.<br>Ninety bikes.<br><span class="dim">Nobody can reach<br>the phone.</span></h1>
-      <p class="hero__sub">The speakers stopped cutting out. The harder problem is who gets to press skip — and the answer turns out to have nothing to do with building a network.</p>
+      <p class="hero__sub">The speakers stopped cutting out. The harder problem is who gets to press skip, without anyone surrendering their Spotify account — and the answer turns out to have nothing to do with building a network.</p>
     </div>
     <div class="hero__art" aria-hidden="true">
       <svg viewBox="0 0 1200 170" role="presentation">
@@ -487,6 +487,7 @@ footer a{color:#B9C0CE}
     <h2 class="chapter__h">The phone is at the front. You are not.</h2>
     <p>With SKAA the sound is handled. But the phone driving it is cable-tied to one bike at the head of the parade, and the people who need to change what's playing are scattered through the line.</p>
     <p>The needs are ordinary: skip a track that isn't landing, drop the volume approaching a garda checkpoint or a residential street, queue the big one for the final stretch. What isn't ordinary is doing it from ninety metres back, while moving, in the dark.</p>
+    <p>There's also a hard constraint that shapes everything below: <strong>everyone has their own Spotify account</strong>, and nobody wants to surrender theirs for the night.</p>
     <p>So the crew tried <strong>Spotify Jam</strong>. And it fell apart in a way that's worth looking at closely, because the failure has been misdiagnosed — and the wrong diagnosis leads straight to building a network you don't need.</p>
   </div>
 </section>
@@ -573,7 +574,7 @@ footer a{color:#B9C0CE}
     </div>
     <div class="step" data-step="3">
       <span class="step__k">The diagnosis</span>
-      <p>This was never a connectivity problem. It's a <em>counting</em> problem: four devices were making sound, and four independent clocks will always come apart. No network fixes that.</p>
+      <p>This was never a connectivity problem. It's a <em>counting</em> problem: four devices were making sound, and four independent clocks will always come apart. No network fixes that — and note what it doesn't prove. Jam isn't broken. Get the count down to one and the same feature works perfectly.</p>
     </div>
   </div>
 </section>
@@ -587,7 +588,7 @@ footer a{color:#B9C0CE}
     <h2 class="chapter__h">Putting everyone on one network</h2>
     <p>Here is the reasonable instinct. Remote control works flawlessly at home on Wi-Fi. There's no Wi-Fi on the street. So: give everyone a private network that follows them around — a Tailscale tailnet — and you've recreated the living room.</p>
     <p>It's a genuinely good instinct, and it's wrong for two independent reasons. Either one on its own would sink it.</p>
-    <p><strong>First: Spotify's remote control was never using your Wi-Fi.</strong> When two devices are signed into the same Spotify account, one can drive the other through Spotify's own servers. Different phones, different carriers, opposite ends of the country — it works. There's a long-running thread on Spotify's community forum from people reporting this as a <em>security hole</em>, which is about the strongest confirmation you could ask for that it works.</p>
+    <p><strong>First: Spotify's remote control was never using your Wi-Fi.</strong> Every way of controlling someone else's playback — a Jam, or two devices sharing one account — routes through Spotify's own servers. Different phones, different carriers, opposite ends of the country: it works, and no local network is involved at any point. There's a long-running thread on Spotify's community forum from people reporting cross-network control as a <em>security hole</em>, which is about the strongest confirmation you could ask for.</p>
     <p><strong>Second: a tailnet couldn't fake a local network anyway.</strong> Local discovery — the thing that makes a speaker appear on your home Wi-Fi — runs on multicast. Tailscale routes unicast traffic only; multicast and mDNS don't cross it, and it's a long-standing open request on their tracker. The one job you'd be installing it for is the one job it can't do.</p>
   </div>
 
@@ -654,6 +655,42 @@ footer a{color:#B9C0CE}
 
 <hr class="hr">
 
+<!-- ============ 6b. THE ACCOUNT QUESTION ============ -->
+<section class="chapter">
+  <div class="col">
+    <p class="eyebrow">The account question</p>
+    <h2 class="chapter__h">Nobody has to give up their Spotify</h2>
+    <p>There are exactly two ways to change what's playing on somebody else's phone, and choosing between them is the whole design decision.</p>
+    <p><strong>Spotify Connect is same-account only.</strong> The device list you see is your account's device list, and no tier or setting changes that. Two people on separate accounts, standing in the same room, cannot control each other's playback at all. The only route is everyone logging out and back in as one shared account.</p>
+    <p><strong>Spotify Jam is the cross-account route</strong> — the one actually built for this. Everyone stays on their own account. The host starts a Jam, shares a link, and guests can play, pause, skip and add to the queue.</p>
+    <p>With one catch that is very likely why the first attempt disappointed: <strong>guest controls are off by default.</strong> Until the host switches them on, guests can add to the queue and nothing else — which feels precisely like a feature that doesn't work.</p>
+  </div>
+
+  <div class="figwrap">
+    <div class="fig scrollx">
+      <table>
+        <thead><tr><th>&nbsp;</th><th>Spotify Connect</th><th>Spotify Jam</th></tr></thead>
+        <tbody>
+          <tr><td>Whose account</td><td>One shared account, everybody logs into it</td><td><b>Everyone keeps their own</b></td></tr>
+          <tr><td>Who can control playback</td><td>Anyone signed into that account</td><td>Guests — <b>once the host enables guest controls</b></td></tr>
+          <tr><td>Setup per event</td><td>None</td><td>Host starts a Jam, shares a link or QR</td></tr>
+          <tr><td>Do guests need Premium</td><td>Not applicable — one account</td><td>Only when joining <b>remotely</b>. Joining in person is free</td></tr>
+          <tr><td>How it goes wrong</td><td>Someone presses play and steals the stream</td><td>Someone's own phone drives a speaker</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="callout callout--go">
+      <span class="tag">Join in person, at the meeting point</span>
+      <p>Guests joining a Jam <em>remotely</em> need Premium of their own. Guests joining <em>in person</em> — phones held close together for a moment with Bluetooth on — do not. Get everyone joined before you roll out and it costs nothing, whatever plan they're on.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
 <!-- ============ 7. THE ANSWER ============ -->
 <section class="chapter">
   <div class="col">
@@ -661,7 +698,7 @@ footer a{color:#B9C0CE}
     <h2 class="chapter__h">Two planes that never touch</h2>
     <p>Here is the whole design in one idea. The parade runs on two separate systems, and almost every mistake comes from mixing them up.</p>
     <p>The <strong>audio plane</strong> is radio. One phone, one cable, one SKAA transmitter, four speakers. No internet, no Wi-Fi, no accounts. If the playlist is downloaded, this half keeps working in a tunnel.</p>
-    <p>The <strong>control plane</strong> is the internet. Admin phones send instructions to Spotify's servers, which pass them down to the disco phone. Tiny messages — a skip is a few hundred bytes, not a song.</p>
+    <p>The <strong>control plane</strong> is the internet. Admin phones — <em>on their own accounts</em> — send instructions into a Jam, which Spotify's servers pass down to the disco phone. Tiny messages: a skip is a few hundred bytes, not a song.</p>
     <p>The disco phone is the single point where the two meet. It is the only device on the entire parade permitted to make a sound. Everyone else holds a remote control.</p>
   </div>
 
@@ -683,14 +720,14 @@ footer a{color:#B9C0CE}
           <rect x="126" y="50" width="36" height="56" rx="5" class="s-box"/><rect x="131" y="55" width="26" height="38" rx="2" fill="#070B16"/>
         </g>
         <text class="s-name" x="30" y="126">ADMIN PHONES</text>
-        <text class="s-lab-s" x="30" y="142">2–5 people · anywhere in the line</text>
+        <text class="s-lab-s" x="30" y="142">2–5 people · their own accounts</text>
 
         <line x1="172" y1="78" x2="246" y2="78" class="s-amber-s" stroke-width="1.6" marker-end="url(#ah-a3)"/>
         <text class="s-lab-s" x="209" y="68" text-anchor="middle" style="fill:#F7A93B">commands</text>
 
         <rect x="254" y="48" width="150" height="60" rx="3" class="s-box" style="stroke:#F7A93B"/>
         <text class="s-name" x="329" y="74" text-anchor="middle" style="fill:#F7A93B">SPOTIFY'S SERVERS</text>
-        <text class="s-lab-s" x="329" y="92" text-anchor="middle">on 4G / 5G · any network</text>
+        <text class="s-lab-s" x="329" y="92" text-anchor="middle">ONE JAM · any network</text>
 
         <path d="M404 78 C 462 78, 470 112, 470 146" class="s-amber-s" stroke-width="1.6" marker-end="url(#ah-a3)"/>
         <text class="s-lab-s" x="486" y="112" style="fill:#F7A93B">play · pause · skip · volume · queue</text>
@@ -751,43 +788,45 @@ footer a{color:#B9C0CE}
 <section class="chapter">
   <div class="col">
     <p class="eyebrow">Setting it up</p>
-    <h2 class="chapter__h">One evening in the pub, once</h2>
-    <p>All of this is one-time setup except the last step, which takes about five seconds on the night. Do the rest in advance, indoors, with everyone's phone on the table.</p>
+    <h2 class="chapter__h">Five minutes at the meeting point</h2>
+    <p>The disco phone gets prepared at home. The admins do nothing at all until everyone is together at the start of the ride, and then it takes about a minute between them.</p>
   </div>
 
   <div class="figwrap">
     <div class="grid grid--2">
       <div class="cell">
-        <span class="tag">Once, then before every ride</span>
+        <span class="tag">Before you leave the house</span>
         <h3>The disco phone</h3>
-        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">The one on the sound bike, cabled to the transmitter.</p>
+        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">The one on the sound bike, cabled to the transmitter. It hosts the Jam.</p>
         <ol class="steps">
-          <li>Sign it into the shared <strong>Bike Disco</strong> Spotify account. It needs Premium.</li>
-          <li><strong>Download the playlist for offline.</strong> This is the single most valuable thing on the page — it means a coverage blackspot can't stop the music.</li>
-          <li>Plug into the SKAA transmitter. Set phone volume around 80% and leave it; do the real volume on the transmitter.</li>
+          <li>Whoever owns this phone needs <strong>Premium</strong> — their own everyday account is fine. Nobody else changes anything.</li>
+          <li><strong>Download the playlist for offline.</strong> The most valuable line on this page: a coverage blackspot then cannot stop the music.</li>
+          <li>Plug into the SKAA transmitter. Phone volume around 80% and leave it — do the real volume on the transmitter.</li>
           <li>Do Not Disturb on. A phone call will duck your music in front of a hundred people.</li>
-          <li>Mobile data stays <em>on</em> — that's how the remotes reach it. Battery pack attached.</li>
-          <li>Press play here, on this phone, first. Then leave it alone.</li>
+          <li>Mobile data on. Battery pack attached.</li>
+          <li>Start the playlist, then start the Jam.</li>
+          <li><strong>Jam details → Guest settings → turn on guest controls.</strong> Miss this and your admins can queue tracks but never skip one.</li>
         </ol>
       </div>
       <div class="cell">
-        <span class="tag">Once each, in advance</span>
+        <span class="tag">At the meeting point, once</span>
         <h3>The admin phones</h3>
-        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">Two to five people, anywhere in the line.</p>
+        <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.2rem">Two to five people. Nothing to install, nothing to log out of.</p>
         <ol class="steps">
-          <li>Sign into the same <strong>Bike Disco</strong> account in the Spotify app.</li>
-          <li>Settings → <strong>Apps and devices</strong> → turn <strong>off</strong> "Show local devices only". This is the setting that trips everyone up: leave it on and the disco phone stays invisible because it isn't on your Wi-Fi.</li>
-          <li>iPhone only: iOS Settings → Spotify → <strong>Local Network</strong> → on.</li>
-          <li>On the night: open Spotify, tap the <strong>Connect</strong> icon, choose <strong>DISCO PHONE</strong>. That's it — you're a remote.</li>
+          <li><strong>Stay on your own account.</strong> Nothing about your Spotify changes, tonight or afterwards.</li>
+          <li>Join the Jam: hold your phone near the disco phone with Bluetooth on, or scan its QR code. Doing it here, in person, is what makes it free on any plan.</li>
+          <li><strong>Turn your own volume to zero.</strong> Your phone streams along silently — that's normal, and nobody hears it.</li>
+          <li>Never plug your phone into a speaker, or pair it with one. That is the single thing that breaks the night.</li>
+          <li>Skip, pause and queue from your own Spotify app, from anywhere in the line.</li>
         </ol>
       </div>
     </div>
   </div>
 
   <div class="col">
-    <div class="callout">
-      <span class="tag">Name the phone something obvious</span>
-      <p>Whatever the disco phone is called in its own settings is what everyone sees in the Connect list. Call it <span class="mono">DISCO PHONE</span>, in capitals. Not "iPhone (3)". The whole system's safety rail depends on people recognising that name in a hurry.</p>
+    <div class="callout callout--warn">
+      <span class="tag">The host has to stay put</span>
+      <p>If the host leaves the Jam or closes Spotify, <strong>the Jam ends for everyone</strong>. The music keeps playing on the disco phone, but every remote goes dead until somebody restarts the Jam and reshares the link. Leave the disco phone's Spotify open and untouched.</p>
     </div>
   </div>
 </section>
@@ -796,25 +835,25 @@ footer a{color:#B9C0CE}
 <section class="chapter" style="padding-top:0">
   <div class="col">
     <p class="eyebrow">The golden rule</p>
-    <h2 class="chapter__h">Read the green bar</h2>
-    <p>One Spotify account plays on one device at a time. That's a feature here — it makes it impossible for two people to start different songs — but it's also the one way to break the night. If an admin hits play <em>without</em> selecting the disco phone first, the music jumps to their pocket and the street goes silent.</p>
-    <p>Spotify tells you which it is, every time, along the bottom of the screen. Teach this one picture and nothing else:</p>
+    <h2 class="chapter__h">Make no noise</h2>
+    <p>In a Jam every phone in the session streams the same track — that's how it keeps everyone's queue and buttons in step. Yours included. As long as your phone is silent and plugged into nothing, that is completely invisible.</p>
+    <p>The second a phone starts driving a speaker, there are two sound systems on two clocks, and you are back to the night everybody remembers. One picture to teach:</p>
   </div>
 
   <div class="figwrap" style="max-width:38rem">
     <div class="grid" style="gap:1rem;background:none;border:none">
       <div class="cell" style="border:1px solid rgba(29,185,84,.3);border-radius:3px">
-        <div class="bar"><span class="bar__dot"></span><span class="bar__t"><b>DISCO PHONE</b>Listening on</span></div>
-        <p style="margin:1rem 0 0;font-size:.92rem"><strong>Green, and it says DISCO PHONE.</strong> You are holding a remote control. Skip, pause, change the volume — it all lands on the rig. Go ahead.</p>
+        <div class="bar"><span class="bar__dot"></span><span class="bar__t"><b>SILENT · PLUGGED INTO NOTHING</b>Volume at zero, in the Jam</span></div>
+        <p style="margin:1rem 0 0;font-size:.92rem"><strong>You are a remote control.</strong> Skip, pause and queue all land on the rig. Your own phone makes no sound and nobody knows it's streaming.</p>
       </div>
       <div class="cell" style="border:1px solid rgba(255,79,110,.3);border-radius:3px">
-        <div class="bar bar--bad"><span class="bar__dot"></span><span class="bar__t"><b>THIS PHONE</b>Playing on</span></div>
-        <p style="margin:1rem 0 0;font-size:.92rem"><strong>Anything else — or no bar at all.</strong> You are about to steal the music. Tap the Connect icon, pick DISCO PHONE, <em>then</em> press play. The song resumes on the rig where it left off.</p>
+        <div class="bar bar--bad"><span class="bar__dot"></span><span class="bar__t"><b>CONNECTED TO A SPEAKER</b>Your phone is making noise</span></div>
+        <p style="margin:1rem 0 0;font-size:.92rem"><strong>You are now a second sound system</strong> — on your own clock, drifting further from the rig every second. This is exactly what went wrong last time. Disconnect it.</p>
       </div>
     </div>
   </div>
 
-  <div class="pull"><p>If it doesn't say<br><span class="q">disco phone,</span><br>don't press play.</p></div>
+  <div class="pull"><p>Your phone is a <span class="q">remote,</span><br>not a <span class="q">speaker.</span></p></div>
 </section>
 
 <!-- ============ 10. WHEN IT BREAKS ============ -->
@@ -830,24 +869,39 @@ footer a{color:#B9C0CE}
         <thead><tr><th>What happens</th><th>What you'll see</th><th>The fix</th></tr></thead>
         <tbody>
           <tr>
-            <td>The street goes silent mid-song</td>
-            <td>One admin's phone is now playing the track to itself</td>
-            <td>That person taps <b>Connect → DISCO PHONE</b>, then play. It resumes on the rig from the same spot.</td>
+            <td>Admins can queue but not skip</td>
+            <td>Adding songs works, skip does nothing</td>
+            <td>Guest controls are off. On the disco phone: <b>Jam details → Guest settings → allow guests to control playback</b>.</td>
           </tr>
           <tr>
-            <td>DISCO PHONE isn't in the list</td>
-            <td>"No devices available", or only nearby speakers</td>
-            <td>Check <b>"Show local devices only" is off</b>. Then wake the disco phone and open Spotify on it.</td>
+            <td>Every remote dies at once</td>
+            <td>Music still playing, nobody can touch it</td>
+            <td>The host left the Jam or closed Spotify. <b>Restart the Jam</b> on the disco phone and reshare the link.</td>
           </tr>
           <tr>
-            <td>It vanished after a long break</td>
-            <td>Device was there earlier, gone now</td>
-            <td>Connect drops idle devices after roughly <b>10 minutes</b>. Wake the disco phone; it comes straight back.</td>
+            <td>An echo, or the beat doubling</td>
+            <td>Two sources audible, drifting apart</td>
+            <td>A second phone is driving a speaker. <b>Find it and disconnect it</b> — SKAA receivers on one transmitter physically cannot drift.</td>
+          </tr>
+          <tr>
+            <td>A Free-account admin can't join</td>
+            <td>"Premium required"</td>
+            <td>They're joining remotely. They must <b>join in person</b>, phones held together — so do it at the meeting point.</td>
+          </tr>
+          <tr>
+            <td>Someone wants in mid-ride</td>
+            <td>They have no link</td>
+            <td>Reshare the invite in the group chat. Joining now is remote, so <b>they'll need their own Premium</b>.</td>
+          </tr>
+          <tr>
+            <td>Volume buttons do nothing</td>
+            <td>Skip works, volume doesn't</td>
+            <td>Shared volume doesn't apply to a wired or Bluetooth output. <b>Do volume at the transmitter</b> — where it belongs anyway.</td>
           </tr>
           <tr>
             <td>An admin has no signal</td>
             <td>Their taps do nothing</td>
-            <td>Nothing to do — <b>the music keeps playing</b>. Another admin covers, or wait for bars.</td>
+            <td>Nothing to do — <b>the music keeps playing</b>. Another admin covers until the bars come back.</td>
           </tr>
           <tr>
             <td>The disco phone loses signal</td>
@@ -858,11 +912,6 @@ footer a{color:#B9C0CE}
             <td>A speaker cuts out</td>
             <td>One speaker only, others fine</td>
             <td>Range or obstruction. Get it back within <b>≈45 m</b> of the transmitter — bodies count as obstruction.</td>
-          </tr>
-          <tr>
-            <td>Two speakers are out of step</td>
-            <td>Audible echo or flam</td>
-            <td>Something else is playing. <b>Find the second device</b> — SKAA receivers on one transmitter physically cannot drift.</td>
           </tr>
         </tbody>
       </table>
@@ -999,15 +1048,34 @@ footer a{color:#B9C0CE}
 <!-- ============ 12. PLAN B ============ -->
 <section class="chapter">
   <div class="col">
-    <p class="eyebrow">If sharing an account is a dealbreaker</p>
-    <h2 class="chapter__h">Jam, done properly</h2>
-    <p>The honest caveat to everything above: signing into the Bike Disco account means signing <em>out</em> of your own Spotify for the night. For two to five people once a month that's a fair trade. If it isn't, Jam is a real fallback — and it deserves a fairer hearing than its first outing gave it.</p>
-    <p>Jam didn't fail because Jam is broken. It failed because several phones were each feeding a speaker. Point every guest phone at nothing — no speaker, screen locked, in a pocket — and let the one host phone drive the rig, and the drift becomes somebody else's problem. Guests can still pause, skip and queue, and everyone keeps their own account.</p>
-    <p>The costs are real though: a fresh invite link or QR code every single event, remote guests needing Premium of their own, guest phones quietly burning data and battery streaming audio nobody hears, and behaviour that differs depending on whether people joined in person or remotely. That's a lot of moving parts for a crew you've described as not especially technical.</p>
+    <p class="eyebrow">If Jam turns out flaky</p>
+    <h2 class="chapter__h">The bulletproof fallback</h2>
+    <p>Jam is the right first choice because nobody touches their account. But it has moving parts: a link to reshare each event, a guest-controls toggle that can end up off, and a host who has to stay in the session.</p>
+    <p>The alternative removes every one of those, at a single cost. Make one shared <strong>Bike Disco</strong> Premium account, put the disco phone on it, and have the admins sign into it too. Now everyone is on one account, so <strong>Spotify Connect</strong> applies: open the app, tap the Connect icon, choose <span class="mono">DISCO PHONE</span>, and you're a remote. No invite links, no per-event setup, nothing to toggle.</p>
+    <p>The cost is real. Signing into the Bike Disco account means signing <em>out</em> of your own for the night. And it brings one new failure mode: a single account plays on one device at a time, so an admin who presses play <em>without</em> selecting DISCO PHONE first drags the music into their pocket and the street goes quiet. Recovery takes five seconds — select DISCO PHONE, press play — but it has to be taught.</p>
+    <p>Three settings make it work, and the first is the one everybody misses:</p>
+    <ul class="ticks">
+      <li>Settings → <strong>Apps and devices</strong> → turn <strong>off</strong> "Show local devices only". Left on, the disco phone stays invisible precisely because it isn't on your Wi-Fi.</li>
+      <li>iPhone: iOS Settings → Spotify → <strong>Local Network</strong> → on.</li>
+      <li>Name the disco phone <span class="mono">DISCO PHONE</span>, in capitals — not "iPhone (3)". Everyone has to spot it in a hurry.</li>
+    </ul>
+    <p style="margin-top:1.15em">Connect also drops idle devices after roughly ten minutes; wake the disco phone and it reappears in the list.</p>
     <div class="callout">
-      <span class="tag">One thing worth five minutes of testing</span>
-      <p>There may be a way to have both. Leave the Spotify <em>app</em> signed into your own account, and open <span class="mono">open.spotify.com</span> in your phone's browser signed into the Bike Disco account, using the web player purely as a remote. If the Connect device picker shows DISCO PHONE there, nobody has to log out of anything. Test it before you rely on it — mobile browsers are inconsistent about this.</p>
+      <span class="tag">Worth five minutes of testing</span>
+      <p>You may be able to have both. Leave the Spotify <em>app</em> on your own account, and open <span class="mono">open.spotify.com</span> in your phone's browser signed into the Bike Disco account, using the web player purely as a remote. If the Connect picker shows DISCO PHONE there, nobody logs out of anything. Mobile browsers are inconsistent about this — test it before you rely on it.</p>
     </div>
+  </div>
+</section>
+
+<!-- ============ 12b. PLAN C ============ -->
+<section class="chapter" style="padding-top:0">
+  <div class="col">
+    <p class="eyebrow">If somebody fancies building something</p>
+    <h2 class="chapter__h">A web page with three enormous buttons</h2>
+    <p>There's a third route that beats both of the above on sheer ease of use, at the cost of an afternoon from whoever is technical.</p>
+    <p>Spotify's Web API can drive playback on any device the account holder has authorised. Authorise it once against the disco phone's account, keep the token on a small server, and put three huge buttons on a web page: <span class="mono">SKIP</span>, <span class="mono">PAUSE</span>, <span class="mono">QUIETER</span>.</p>
+    <p>The admins then need no Spotify account, no app, no login and no invite link. They bookmark one URL and hit a button wearing gloves, in the dark, at speed. Nothing else on this page comes close for that.</p>
+    <p>The catches: the controlled account needs Premium; the token can't live in a public web page, so this needs a small backend rather than plain static hosting; and anybody holding the link can press the buttons, so keep it obscure and be ready to rotate it.</p>
   </div>
 </section>
 
@@ -1016,25 +1084,25 @@ footer a{color:#B9C0CE}
   <div class="col">
     <p class="eyebrow">The decision</p>
     <div class="verdict">
-      <div class="verdict__v">Skip the<br>tailnet</div>
+      <div class="verdict__v">Use a Jam.<br>Skip the<br>tailnet.</div>
       <div>
-        <p style="margin:0">Spotify Connect already does what you wanted Tailscale to do, over the mobile network, with no shared Wi-Fi anywhere in the picture. The tailnet would add work and remove nothing.</p>
+        <p style="margin:0">A Jam does exactly what you wanted Tailscale to do — across separate accounts, over the mobile network, with no shared Wi-Fi anywhere in the picture. Switch on guest controls, keep one device making sound, and there is nothing left for a tailnet to solve.</p>
       </div>
     </div>
     <h3 style="margin:2.6rem 0 1rem;font-size:1.24rem">What to actually do</h3>
     <ul class="ticks">
-      <li>Make one shared <strong>Bike Disco</strong> Spotify Premium account. That's the whole infrastructure budget.</li>
-      <li>Cable one phone to the SKAA transmitter and let nothing else on the parade make a sound.</li>
-      <li>Download the playlist to that phone so a dead spot can't kill the night.</li>
-      <li>Ride it in the <strong>middle</strong> of the line, not the front.</li>
-      <li>Get the admins signed in and "Show local devices only" switched off before the day.</li>
-      <li>Teach one rule: <strong>if the bar doesn't say DISCO PHONE, don't press play.</strong></li>
+      <li>One phone, cabled to the SKAA transmitter, Premium, playlist downloaded. It hosts the Jam.</li>
+      <li><strong>Turn on guest controls.</strong> This is the step that decides whether the whole thing works.</li>
+      <li>Everyone joins <strong>in person at the meeting point</strong>, keeping their own accounts, free on any plan.</li>
+      <li>Every admin sets their own volume to zero and plugs into nothing.</li>
+      <li>Ride the sound bike in the <strong>middle</strong> of the line, not the front.</li>
+      <li>Teach one rule: <strong>your phone is a remote, not a speaker.</strong></li>
     </ul>
     <h3 style="margin:2.4rem 0 1rem;font-size:1.24rem">Worth a dry run</h3>
     <ul class="ticks no">
-      <li>Two phones, two different mobile networks, no Wi-Fi — confirm the Connect picker finds the other phone. Ten minutes in a park settles the whole question.</li>
-      <li>Check whether four speakers is actually enough coverage for the size of parade you're planning.</li>
-      <li>Try the web-player-as-remote trick, if logging out of personal accounts is unpopular.</li>
+      <li>Three phones, three different networks, Wi-Fi off. Host a Jam, enable guest controls, and confirm a guest can genuinely skip a track. Ten minutes in a park settles the entire question.</li>
+      <li>Check the music keeps playing on the host phone when a guest's phone loses signal or leaves.</li>
+      <li>Confirm four speakers is enough coverage for the size of parade you're planning.</li>
     </ul>
   </div>
 </section>
@@ -1044,7 +1112,9 @@ footer a{color:#B9C0CE}
     <h4>Where this comes from</h4>
     <ul>
       <li><a href="https://support.spotify.com/us/article/spotify-connect/">Spotify — Spotify Connect</a> · device visibility, the "Show local devices only" setting, the ~10-minute idle timeout</li>
-      <li><a href="https://support.spotify.com/us/article/jam/">Spotify — Jam</a> · who can control playback, Premium requirements, joining in person vs remotely</li>
+      <li><a href="https://support.spotify.com/us/article/jam/">Spotify — Jam</a> · guest controls, Premium requirements, joining in person vs remotely, the host ending the Jam</li>
+      <li><a href="https://community.spotify.com/t5/Your-Library/Jam-session-playback-control-not-working/td-p/7178498">Spotify Community — Jam playback control not working</a> · guest controls are off by default and live under Jam details → Guest settings</li>
+      <li><a href="https://developer.spotify.com/documentation/web-api/reference/start-a-users-playback">Spotify Web API — player reference</a> · the DIY remote: <span class="mono">user-modify-playback-state</span> scope, Premium required on the controlled account</li>
       <li><a href="https://community.spotify.com/t5/Other-Podcasts-Partners-etc/Devices-can-be-controlled-from-any-network/td-p/4428681">Spotify Community — devices can be controlled from any network</a> · cross-network Connect control, reported as a security concern</li>
       <li><a href="https://community.spotify.com/t5/Live-Ideas/Add-a-Manual-Audio-Delay-Sync-Offset-Slider-for-Spotify-Jam/idi-p/7353774">Spotify Community — Jam sync offset request</a> · first-hand reports of 3–7 second drift between participants</li>
       <li><a href="https://skaa.com/pages/transmitters">SKAA — transmitters</a> and <a href="https://www.residentialsystems.com/features/going-forward/skaas-the-limit">Residential Systems — SKAA's the Limit</a> · 150 ft range, four receivers per transmitter, five cells, ±40 µs</li>

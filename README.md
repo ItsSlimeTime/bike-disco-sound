@@ -10,43 +10,61 @@ Single static page. No build step, no dependencies. `index.html` is the whole th
 
 ## The short version
 
+Everyone keeps their own Spotify account. That rules out Spotify Connect and makes
+**Spotify Jam** the answer.
+
+**Spotify Connect is same-account only.** There is no tier or setting that lets one
+account control another account's playback. Family members in the same room can't do it
+without logging out and back in as the same account.
+
+**Spotify Jam is the cross-account mechanism.** Guests keep their own accounts and can
+play, pause, skip and queue — but **guest controls are OFF by default** (Jam details →
+Guest settings). That's very likely why the first attempt felt broken.
+
 **Tailscale isn't needed, and wouldn't work anyway.**
 
-1. **Spotify Connect does not require a shared network.** Two phones signed into the
-   same Spotify account can control each other through Spotify's servers — different
-   carriers, different networks, no Wi-Fi involved.
-2. **A tailnet couldn't substitute for a LAN regardless.** Local device discovery runs
-   on multicast/mDNS, which Tailscale does not carry (open issues
+1. Jam and Connect both route through Spotify's servers, not your LAN. No shared network
+   is involved at any point.
+2. A tailnet couldn't substitute for a LAN regardless — local discovery is multicast/mDNS,
+   which Tailscale does not carry (open issues
    [#11134](https://github.com/tailscale/tailscale/issues/11134),
    [#1013](https://github.com/tailscale/tailscale/issues/1013)).
 
-**Jam's failure was misdiagnosed.** In a remote Jam every participant's phone decodes
-its own stream; several phones feeding several speakers drift by a reported 3–7 seconds.
-That is a "too many devices making sound" problem, not a connectivity problem.
+**Jam's earlier failure was misdiagnosed.** In a Jam every participant's phone decodes its
+own stream; several phones each feeding a speaker drift by a reported 3–7 seconds. That's a
+"too many devices making sound" problem, not a connectivity fault — and fixing the count is
+exactly what makes Jam viable.
 
-**The architecture that works** — two planes that never touch:
+**The architecture** — two planes that never touch:
 
 | | Carries | Over | Needs internet |
 |---|---|---|---|
-| Control plane | play / pause / skip / volume | Spotify's servers | Yes, both ends |
+| Control plane | play / pause / skip / queue | Spotify's servers (a Jam) | Yes, both ends |
 | Audio plane | the actual sound | SKAA, 2.4 GHz radio | No |
 
-One shared Spotify Premium account. One phone cabled to the SKAA transmitter — the only
-device on the parade allowed to make a sound. Everyone else is a remote.
+One phone cabled to the SKAA transmitter hosts the Jam and is the only device on the parade
+allowed to make a sound. Everyone else joins on their own account, sets their volume to zero,
+and acts purely as a remote.
+
+Fallbacks documented on the page: a shared **Bike Disco** account with Connect (bulletproof,
+but everyone logs out of their own Spotify), and a DIY web remote on the Spotify Web API
+(admins need no account at all, but it needs a small backend).
 
 ## Gotchas the page covers
 
-- Admin phones: **Settings → Apps and devices → "Show local devices only" must be OFF.**
-  Left on, the disco phone stays invisible because it isn't on your Wi-Fi. This is the
-  single most likely reason a first attempt fails.
+- **Guest controls are off by default.** Jam details → Guest settings → allow guests to
+  control playback. Without it guests can queue but never skip.
+- **Joining in person is free; joining remotely needs Premium.** Get everyone into the Jam
+  at the meeting point, phones held together, before rolling out.
+- **If the host leaves the Jam or closes Spotify, the Jam ends for everyone.** Music keeps
+  playing; every remote goes dead until it's restarted and the link reshared.
 - Download the playlist offline on the disco phone — playback then survives coverage
   blackspots (remote control doesn't, but the music never stops).
-- One account plays on one device at a time. An admin pressing play without selecting
-  DISCO PHONE first steals the music. Hence the golden rule: read the green bar.
-- Spotify Connect drops idle devices after roughly 10 minutes.
-- **SKAA reaches ~45 m and drives at most 4 receivers per transmitter.** A 150–200 m
-  parade cannot be covered from the front — ride the sound bike in the *middle* and the
-  same range covers ~90 m. More transmitters add speakers, not distance.
+- Shared volume control doesn't apply to wired or Bluetooth outputs. Do volume at the
+  transmitter.
+- **SKAA reaches ~45 m and drives at most 4 receivers per transmitter.** A 150–200 m parade
+  cannot be covered from the front — ride the sound bike in the *middle* and the same range
+  covers ~90 m. More transmitters add speakers, not distance.
 
 ## Local preview
 
